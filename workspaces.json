@@ -1,0 +1,58 @@
+[
+    {
+        "name": "@wp-plugins/wptelegram--blocks",
+        "location": "domains/wptelegram/core/blocks"
+    },
+    {
+        "name": "@wp-plugins/wptelegram",
+        "location": "domains/wptelegram/core/main"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-login--blocks",
+        "location": "domains/wptelegram/login/blocks"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-login",
+        "location": "domains/wptelegram/login/main"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-pro--im",
+        "location": "domains/wptelegram/pro/im"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-pro",
+        "location": "domains/wptelegram/pro/main"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-pro--p2tg-metabox",
+        "location": "domains/wptelegram/pro/p2tg-metabox"
+    },
+    {
+        "name": "@wp-plugins/adapters",
+        "location": "packages/adapters"
+    },
+    {
+        "name": "@wp-plugins/components",
+        "location": "packages/components"
+    },
+    {
+        "name": "@wp-plugins/form",
+        "location": "packages/form"
+    },
+    {
+        "name": "@wp-plugins/i18n",
+        "location": "packages/i18n"
+    },
+    {
+        "name": "@wp-plugins/icons",
+        "location": "packages/icons"
+    },
+    {
+        "name": "@wp-plugins/services",
+        "location": "packages/services"
+    },
+    {
+        "name": "@wp-plugins/utilities",
+        "location": "packages/utilities"
+    }
+]
