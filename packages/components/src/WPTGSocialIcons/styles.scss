@@ -1,0 +1,21 @@
+.wptelegram-social-icons {
+	&__icon {
+		&--telegram a {
+			align-items: center;
+			background-color: #17a2b8;
+			border-radius: 3px;
+			display: flex;
+			max-width: max-content;
+			padding-bottom: 1px;
+			padding-left: 6px;
+			padding-right: 6px;
+			padding-top: 1px;
+			text-decoration: none;
+			img {
+				margin-inline-end: 0.3em;
+				height: 12px;
+				width: 12px;
+			}
+		}
+	}
+}

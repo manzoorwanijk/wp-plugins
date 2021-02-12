@@ -1,0 +1,16 @@
+{
+	"author": "WP Plugins",
+	"name": "@wp-plugins/components",
+	"private": true,
+	"version": "1.0.0",
+	"main": "src/index.ts",
+	"main:src": "src/index.ts",
+	"scripts": {
+		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
+		"update-deps": "npx ncu -p yarn -u",
+		"lint-fix": "eslint ./src/**/*.{ts,tsx} --fix"
+	},
+	"sideEffects": false,
+	"dependencies": {},
+	"license": "GPL-3.0"
+}
