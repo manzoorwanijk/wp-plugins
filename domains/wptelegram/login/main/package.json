@@ -1,6 +1,6 @@
 {
 	"author": "WP Plugins",
-	"name": "@wp-plugins/wptelegram-login",
+	"name": "@wp-plugins/wptelegram-login--main",
 	"version": "1.0.0",
 	"private": true,
 	"license": "GPL-3.0",

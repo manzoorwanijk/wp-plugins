@@ -61,6 +61,8 @@ getDomainsToWatch().forEach(({ name, location }) => {
 	domainPaths.push(domainPath);
 });
 
+console.log('domains: ', Object.keys(domainEntries));
+
 const packagePaths = getPackagePaths().map((location) => resolveApp(`${location}/src/`));
 
 const includePaths = [...domainPaths, ...packagePaths];

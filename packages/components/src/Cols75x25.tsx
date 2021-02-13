@@ -8,7 +8,7 @@ const commonColumnProps: BoxProps = {
 
 const baseColumnWidth: BoxProps['maxW'] = ['100%', '100%', '100%'];
 
-interface Cols75x25Props {
+interface Cols75x25Props extends BoxProps {
 	addBorders?: boolean;
 	leftCol: React.ReactNode;
 	rightCol: React.ReactNode;
@@ -19,9 +19,9 @@ const flexBasisSecond = [...baseColumnWidth, '25%'];
 
 const pxFirst = ['0.4rem', '0.8rem'];
 
-export const Cols75x25: React.FC<Cols75x25Props> = ({ addBorders, leftCol, rightCol, children }) => {
+export const Cols75x25: React.FC<Cols75x25Props> = ({ addBorders, leftCol, rightCol, children, ...rest }) => {
 	return (
-		<Flex flexWrap='wrap'>
+		<Flex flexWrap='wrap' mt='1em' {...rest}>
 			<Box flexBasis={flexBasisFirst} maxW={flexBasisFirst} px='0.4rem'>
 				<Box {...(addBorders && commonColumnProps)} mb='1rem' px={pxFirst} background='#fff'>
 					{leftCol}

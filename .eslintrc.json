@@ -37,6 +37,7 @@
 		],
 		"@typescript-eslint/no-use-before-define": "off",
 		"comma-dangle": "off",
+		"default-case": "off",
 		"jest/valid-title": "off",
 		"jest/no-conditional-expect": "off",
 		"jest/valid-describe": "off",

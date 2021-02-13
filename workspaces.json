@@ -12,7 +12,7 @@
         "location": "domains/wptelegram/login/blocks"
     },
     {
-        "name": "@wp-plugins/wptelegram-login",
+        "name": "@wp-plugins/wptelegram-login--main",
         "location": "domains/wptelegram/login/main"
     },
     {

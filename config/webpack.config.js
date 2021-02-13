@@ -32,6 +32,9 @@ const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
 
+const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
+const { requestToExternal, requestToHandle } = require('./utils');
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
@@ -536,6 +539,10 @@ module.exports = function (webpackEnv) {
       ],
     },
     plugins: [
+			new DependencyExtractionWebpackPlugin({
+				requestToHandle,
+				requestToExternal,
+			}),
       // This gives some necessary context to module not found errors, such as
       // the requesting resource.
       new ModuleNotFoundPlugin(paths.appPath),

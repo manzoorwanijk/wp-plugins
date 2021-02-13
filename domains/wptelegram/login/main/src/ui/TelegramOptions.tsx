@@ -11,7 +11,7 @@ import { getFieldLabel, FormData } from '../services';
 const botTokenAddonProps = { px: '0' };
 
 export const TelegramOptions = () => {
-	const { getValues, setValue } = useFormContext<FormData>();
+	const { getValues, setValue, trigger } = useFormContext<FormData>();
 
 	const [botUsernameReadOnly, setBotUsernameReadOnly] = useState(true);
 	const botUsernameDoubleClick = useCallback(() => setBotUsernameReadOnly(false), []);
@@ -32,12 +32,13 @@ export const TelegramOptions = () => {
 					setResultType: setBotTokenTestResultType,
 					onComplete: (token, { username }) => {
 						setValue('bot_username', username);
+						trigger('bot_username');
 					},
 				},
 				event
 			);
 		},
-		[getValues, setValue]
+		[getValues, setValue, trigger]
 	);
 
 	return (
