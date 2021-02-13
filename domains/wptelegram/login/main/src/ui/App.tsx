@@ -1,7 +1,7 @@
-import { Form, yupResolver } from '@wp-plugins/form';
+import { Form, yupResolver, useForm } from '@wp-plugins/form';
 import { Cols75x25 } from '@wp-plugins/components';
 
-import { useData, validationSchema } from '../services';
+import { useData, validationSchema, FormData } from '../services';
 import { FORM_ID } from '../constants';
 import { LoginOptions } from './LoginOptions';
 import { TelegramOptions } from './TelegramOptions';
@@ -11,16 +11,20 @@ import Sidebar from './Sidebar';
 import { Header } from './Header';
 import { SubmitInfo } from './SubmitInfo';
 import { Instructions } from './Instructions';
-import { useInit, useOnSubmit } from '../services';
+import { useInit, useOnSubmit, useOnInvalid } from '../services';
 
-const resolver = yupResolver(validationSchema);
+const resolver = yupResolver<FormData>(validationSchema);
 
 const App: React.FC = () => {
 	useInit();
 
-	const { savedSettings } = useData();
+	const { savedSettings: defaultValues } = useData();
 
-	const onSubmit = useOnSubmit();
+	const form = useForm<FormData>({ defaultValues, resolver, mode: 'onBlur' });
+
+	const onSubmit = useOnSubmit(form);
+
+	const onInvalid = useOnInvalid();
 
 	const leftCol = (
 		<>
@@ -33,11 +37,10 @@ const App: React.FC = () => {
 			<SubmitInfo />
 		</>
 	);
-
 	const rightCol = <Sidebar />;
 
 	return (
-		<Form defaultValues={savedSettings} id={FORM_ID} resolver={resolver} onSubmit={onSubmit}>
+		<Form id={FORM_ID} onSubmit={form.handleSubmit(onSubmit, onInvalid)} form={form}>
 			<Cols75x25 leftCol={leftCol} rightCol={rightCol}></Cols75x25>
 		</Form>
 	);

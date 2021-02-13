@@ -1,7 +1,9 @@
-import React from 'react';
 import { BaseApiUtilArgs } from '../ajax/types';
+import { APIFetchOptions } from '../apiFetch';
 
-export type TelegramApiMethod = (api_params: any, ajaxOverrides?: JQueryAjaxSettings) => JQuery.jqXHR<any>;
+export type ApiParams = Partial<Record<'string', any>>;
+
+export type TelegramApiMethod<P = any> = (apiParams?: P, fetchOptions?: APIFetchOptions) => Promise<any>;
 
 export type WebhookStatus = 'SET' | 'NOT_SET' | 'ERROR';
 
@@ -10,7 +12,7 @@ export interface TelegramApi {
 	getChatMembersCount?: TelegramApiMethod;
 	getMe?: TelegramApiMethod;
 	getWebhookInfo?: TelegramApiMethod;
-	sendMessage?: TelegramApiMethod;
+	sendMessage?: TelegramApiMethod<SendTextMessageArgs>;
 	setWebhook?: TelegramApiMethod;
 }
 
@@ -19,10 +21,10 @@ export interface TelegramApiUtilBaseArgs extends BaseApiUtilArgs {
 	chat_id?: string;
 }
 
-export type TelegramApiUtil<Args = TelegramApiUtilBaseArgs> = (
-	args: Args,
+export type TelegramApiUtil<A extends TelegramApiUtilBaseArgs = TelegramApiUtilBaseArgs, T = unknown> = (
+	args: A,
 	event?: React.MouseEvent | React.KeyboardEvent
-) => JQuery.jqXHR<any>;
+) => Promise<T>;
 
 export interface TestBotTokenArgs extends TelegramApiUtilBaseArgs {
 	onComplete: (bot_token: string, result: any) => void;

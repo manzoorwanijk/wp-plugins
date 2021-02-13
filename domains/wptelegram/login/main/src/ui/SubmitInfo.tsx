@@ -4,9 +4,10 @@ import { useFormContext } from '@wp-plugins/form';
 
 export const SubmitInfo: React.FC = () => {
 	const { formState } = useFormContext();
-	const { isDirty, isSubmitting } = formState;
+	const { isSubmitting } = formState;
+
 	return (
-		<Button type='submit' isLoading={isSubmitting} isDisabled={!isDirty}>
+		<Button type='submit' isLoading={isSubmitting}>
 			{__('Submit')}
 		</Button>
 	);

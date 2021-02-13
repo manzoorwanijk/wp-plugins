@@ -1,132 +1,104 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@wp-plugins/i18n';
 
+import { getErrorMessage } from '../apiFetch';
 import botApi from './TelegramAPI';
-import { getErrorResultFromXHR } from '../ajax';
 import { TestBotToken, SendTextMessage, TelegramApiUtil, WebhookUtil } from './types';
 
-export const setWebhook: WebhookUtil = (args, event) => {
-	botApi.setEvent(event);
+export const setWebhook: WebhookUtil = async (args, event) => {
+	init(args, event);
 
-	const { bot_token, setInProgress, setStatus, setResult, setResultType, url, allowed_updates } = args;
+	const { setInProgress, setStatus, setResult, setResultType, url, allowed_updates } = args;
 
-	setInProgress(true);
+	const params = { url, allowed_updates };
 
-	const options: JQueryAjaxSettings = {
-		error: (jqXHR) => {
-			console.log('ERROR', jqXHR);
-
-			setStatus('ERROR');
-			setResultType('ERROR');
-
-			setResult(getErrorResultFromXHR(jqXHR));
-		},
-		success: (data, _, jqXHR) => {
-			if (data?.ok) {
-				setStatus('SET');
-				setResultType('SUCCESS');
-				setResult('');
-			} else {
-				setStatus('ERROR');
-				setResultType('ERROR');
-
-				setResult(getErrorResultFromXHR(jqXHR));
-			}
-		},
-		complete: () => setInProgress(false),
-	};
-
-	const params = {
-		url,
-		allowed_updates,
-	};
-
-	botApi.bot_token = bot_token;
-	return botApi.setWebhook(params, options);
-};
-
-export const deleteWebhook: WebhookUtil = (args, event) => {
-	botApi.setEvent(event);
-
-	const { bot_token, setInProgress, setStatus, setResult, setResultType } = args;
-
-	setInProgress(true);
-
-	const options: JQueryAjaxSettings = {
-		error: (jqXHR) => {
-			console.log('ERROR', jqXHR);
-
-			setStatus('ERROR');
-
-			setResultType('ERROR');
-
-			setResult(getErrorResultFromXHR(jqXHR));
-		},
-		success: () => {
-			setStatus('NOT_SET');
-			setResultType('ERROR');
-			setResult('');
-		},
-		complete: () => setInProgress(false),
-	};
-
-	botApi.bot_token = bot_token;
-	return botApi.deleteWebhook({}, options);
-};
-
-export const checkWebhookInfo: WebhookUtil = (args, event) => {
-	botApi.setEvent(event);
-
-	const { bot_token, setInProgress, setStatus, url } = args;
-
-	setInProgress(true);
-
-	const options: JQueryAjaxSettings = {
-		error: (jqXHR) => {
-			console.log('ERROR', jqXHR);
-
-			setStatus('ERROR', () => getErrorResultFromXHR(jqXHR));
-		},
-		success: ({ result }) => {
-			if (url === result.url) {
-				setStatus('SET');
-			} else {
-				setStatus('NOT_SET');
-			}
-		},
-		complete: () => setInProgress(false),
-	};
-
-	botApi.bot_token = bot_token;
-	return botApi.getWebhookInfo({}, options);
-};
-
-export const checkMemberCount: TelegramApiUtil = (args) => {
-	const { bot_token, chat_id, setInProgress, setResult, setResultType } = args;
-
-	setInProgress(true);
-
-	const options: JQueryAjaxSettings = {
-		error: (jqXHR) => {
-			console.log('ERROR', jqXHR);
-
-			setResultType('ERROR');
-
-			setResult(getErrorResultFromXHR(jqXHR));
-		},
-		success: ({ result }) => {
+	try {
+		const data = await botApi.setWebhook(params);
+		if (data?.ok) {
+			setStatus('SET');
 			setResultType('SUCCESS');
-			setResult(result);
-		},
-		complete: () => setInProgress(false),
-	};
+			setResult('');
+		} else {
+			setStatus('ERROR');
+			setResultType('ERROR');
+			setResult(getErrorMessage(data));
+		}
+	} catch (error) {
+		console.log('ERROR', error);
 
-	botApi.bot_token = bot_token;
-	return botApi.getChatMembersCount({ chat_id }, options);
+		setStatus('ERROR');
+		setResultType('ERROR');
+
+		setResult(getErrorMessage(error));
+	} finally {
+		setInProgress?.(false);
+	}
+};
+
+export const deleteWebhook: WebhookUtil = async (args, event) => {
+	init(args, event);
+
+	const { setInProgress, setStatus, setResult, setResultType } = args;
+
+	try {
+		await botApi.deleteWebhook({});
+		setStatus('NOT_SET');
+		setResultType('SUCCESS');
+		setResult('');
+	} catch (error) {
+		console.log('ERROR', error);
+
+		setStatus('ERROR');
+
+		setResultType('ERROR');
+
+		setResult(getErrorMessage(error));
+	} finally {
+		setInProgress?.(false);
+	}
+};
+
+export const checkWebhookInfo: WebhookUtil = async (args, event) => {
+	init(args, event);
+
+	const { setInProgress, setStatus, url } = args;
+
+	try {
+		const { result } = await botApi.getWebhookInfo({});
+		if (url === result.url) {
+			setStatus('SET');
+		} else {
+			setStatus('NOT_SET');
+		}
+	} catch (error) {
+		console.log('ERROR', error);
+
+		setStatus('ERROR', () => getErrorMessage(error));
+	} finally {
+		setInProgress?.(false);
+	}
+};
+
+export const checkMemberCount: TelegramApiUtil = async (args) => {
+	init(args);
+
+	const { chat_id, setInProgress, setResult, setResultType } = args;
+
+	try {
+		const { result } = await botApi.getChatMembersCount({ chat_id });
+
+		setResultType?.('SUCCESS');
+		setResult?.(result);
+	} catch (error) {
+		console.log('ERROR', error);
+
+		setResultType?.('ERROR');
+		setResult?.(getErrorMessage(error));
+	} finally {
+		setInProgress?.(false);
+	}
 };
 
 export const sendTestMessage: SendTextMessage = (args, event) => {
-	botApi.setEvent(event);
-
 	const text =
 		args.text ||
 		window.prompt(
@@ -141,59 +113,54 @@ export const sendTestMessage: SendTextMessage = (args, event) => {
 	return sendTextMessage({ ...args, text }, event);
 };
 
-export const sendTextMessage: SendTextMessage = (args, event) => {
-	botApi.setEvent(event);
+export const sendTextMessage: SendTextMessage = async (args, event) => {
+	init(args, event);
 
-	const { bot_token, chat_id, setInProgress, setResult, setResultType, text } = args;
+	const { chat_id, setInProgress, setResult, setResultType, text } = args;
 
-	setInProgress?.(true);
+	try {
+		await botApi.sendMessage({ chat_id, text });
+		setResultType?.('SUCCESS');
+		setResult?.(__('Success'));
+	} catch (error) {
+		console.log('ERROR', error);
 
-	const options: JQueryAjaxSettings = {
-		error: (jqXHR) => {
-			console.log('ERROR', jqXHR);
-
-			setResultType?.('ERROR');
-
-			setResult?.(getErrorResultFromXHR(jqXHR));
-		},
-		success: () => {
-			setResultType?.('SUCCESS');
-			setResult?.(__('Success'));
-		},
-		complete: () => setInProgress?.(false),
-	};
-
-	botApi.bot_token = bot_token;
-	return botApi.sendMessage({ chat_id, text }, options);
+		setResultType?.('ERROR');
+		setResult?.(getErrorMessage(error));
+	} finally {
+		setInProgress?.(false);
+	}
 };
 
-export const testBotToken: TestBotToken = (args, event) => {
-	botApi.setEvent(event);
+export const testBotToken: TestBotToken = async (args, event) => {
+	init(args, event);
 
 	const { bot_token, setInProgress, setResult, setResultType, onComplete } = args;
 
-	setInProgress(true);
+	try {
+		const { result } = await botApi.getMe({});
+		setResultType('SUCCESS');
 
-	const options: JQueryAjaxSettings = {
-		error: (jqXHR) => {
-			console.log('ERROR', jqXHR);
+		onComplete(bot_token, result);
 
-			setResultType('ERROR');
+		setResult(`${result.first_name} (@${result.username})`);
+	} catch (error) {
+		console.log('ERROR', error);
 
-			onComplete(bot_token, {});
+		setResultType?.('ERROR');
+		setResult?.(getErrorMessage(error));
 
-			setResult(getErrorResultFromXHR(jqXHR));
-		},
-		success: ({ result }) => {
-			setResultType('SUCCESS');
+		onComplete(bot_token, {});
+	} finally {
+		setInProgress?.(false);
+	}
+};
 
-			onComplete(bot_token, result);
+const init: TelegramApiUtil = async (args, event) => {
+	botApi.setEvent(event);
 
-			setResult(`${result.first_name} (@${result.username})`);
-		},
-		complete: () => setInProgress(false),
-	};
+	const { bot_token, setInProgress } = args;
+	setInProgress?.(true);
 
-	botApi.bot_token = bot_token;
-	return botApi.getMe({}, options);
+	botApi.setBotToken(bot_token);
 };

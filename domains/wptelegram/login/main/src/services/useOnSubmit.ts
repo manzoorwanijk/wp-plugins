@@ -1,21 +1,18 @@
 import { useCallback } from 'react';
 
-import { SubmitHandler } from '@wp-plugins/form';
-import { __ } from '@wp-plugins/i18n';
-import { sleep } from '@wp-plugins/utilities';
-import { useDisplayFeedback } from '@wp-plugins/services';
+import { SubmitHandler, UseFormMethods } from '@wp-plugins/form';
+import { useSubmitForm } from '@wp-plugins/services';
 
 import { FormData } from './types';
+import { useData } from './useData';
+import { getErrorMessage } from './fields';
 
-export const useOnSubmit = (): SubmitHandler<FormData> => {
-	const { displaySuccess } = useDisplayFeedback();
+export const useOnSubmit = (form: UseFormMethods<FormData>): SubmitHandler<FormData> => {
+	const { rest_namespace } = useData('api');
 
-	return useCallback(
-		async (data) => {
-			await sleep(2000);
-			console.log(data);
-			displaySuccess({ title: __('Changes saved successfully.') });
-		},
-		[displaySuccess]
-	);
+	const path = `${rest_namespace}/settings`;
+
+	const submitForm = useSubmitForm<FormData>({ form, path, getErrorMessage });
+
+	return useCallback(async (data) => await submitForm(data), [submitForm]);
 };

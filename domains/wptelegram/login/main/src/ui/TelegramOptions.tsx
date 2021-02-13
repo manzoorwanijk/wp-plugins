@@ -11,7 +11,7 @@ import { getFieldLabel, FormData } from '../services';
 const botTokenAddonProps = { px: '0' };
 
 export const TelegramOptions = () => {
-	const { getValues, setValue, trigger } = useFormContext<FormData>();
+	const { getValues, setValue, trigger, errors } = useFormContext<FormData>();
 
 	const [botUsernameReadOnly, setBotUsernameReadOnly] = useState(true);
 	const botUsernameDoubleClick = useCallback(() => setBotUsernameReadOnly(false), []);
@@ -22,17 +22,19 @@ export const TelegramOptions = () => {
 	const [botTokenTestResultType, setBotTokenTestResultType] = useState<ResultType>();
 
 	const onClickTest = useCallback<React.MouseEventHandler>(
-		(event) => {
+		async (event) => {
 			const { bot_token } = getValues();
-			testBotToken(
+			await testBotToken(
 				{
 					bot_token,
 					setInProgress: setTestingBotToken,
 					setResult: setBotTokenTestResult,
 					setResultType: setBotTokenTestResultType,
 					onComplete: (token, { username }) => {
-						setValue('bot_username', username);
-						trigger('bot_username');
+						if (username) {
+							setValue('bot_username', username);
+							trigger('bot_username');
+						}
 					},
 				},
 				event
@@ -45,7 +47,11 @@ export const TelegramOptions = () => {
 		<SectionCard title={__('Telegram Options')}>
 			<FormField
 				addonAfter={
-					<Button onClick={onClickTest} borderStartRadius='0' isDisabled={testingBotToken}>
+					<Button
+						onClick={onClickTest}
+						borderStartRadius='0'
+						isDisabled={Boolean(errors.bot_token) || testingBotToken}
+					>
 						{testingBotToken ? __('Please wait…') : __('Test Token')}
 					</Button>
 				}

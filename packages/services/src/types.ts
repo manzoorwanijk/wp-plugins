@@ -8,10 +8,8 @@ export interface Plugins {
 export interface ApiData {
 	admin_url?: string;
 	ajax_url?: string;
-	event?: React.MouseEvent | React.KeyboardEvent;
 	home_url?: string;
-	nonce?: string;
-	rest_url?: string;
+	rest_namespace?: string;
 	use?: 'SERVER' | 'BROWSER';
 	wp_rest_url?: string;
 }

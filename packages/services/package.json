@@ -11,6 +11,11 @@
 		"lint-fix": "eslint ./src/**/*.{ts,tsx} --fix"
 	},
 	"sideEffects": false,
-	"dependencies": {},
+	"dependencies": {
+		"@wordpress/api-fetch": "3.21.5"
+	},
+	"devDependencies": {
+		"@types/wordpress__api-fetch": "3.2.3"
+	},
 	"license": "GPL-3.0"
 }

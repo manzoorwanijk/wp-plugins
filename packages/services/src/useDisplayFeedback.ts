@@ -61,7 +61,7 @@ export const useDisplayFeedback = (): DF => {
 
 	const displayValidationErrors = useCallback<DF['displayValidationErrors']>(
 		(errors, error) => {
-			const title = error ?? __('Lets fix these errors first.');
+			const title = typeof error === 'string' ? error : __('Lets fix these errors first.');
 			displayError({ title, status: 'warning' });
 			displayErrors(errors);
 		},

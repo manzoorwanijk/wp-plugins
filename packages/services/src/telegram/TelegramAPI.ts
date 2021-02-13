@@ -1,17 +1,17 @@
-import { sendAjaxRequest } from '../ajax';
 import { ApiData } from '../types';
-import { TelegramApiMethod, TelegramApi } from './types';
-
-// const api = window.wptelegramPro?.api;
+import { fetchAPI, APIFetchOptions } from '../apiFetch';
+import { ApiParams, TelegramApiMethod, TelegramApi } from './types';
 
 class ApiClient implements TelegramApi {
-	apiData: Partial<ApiData> = {};
+	private apiData: Partial<ApiData> = {};
 
-	bot_token: string;
+	private botToken: string;
 
-	base_url: string;
+	private baseUrl: string;
 
-	event: React.MouseEvent | React.KeyboardEvent;
+	private path = '/wptelegram-bot/v1';
+
+	private event: React.MouseEvent | React.KeyboardEvent;
 
 	deleteWebhook?: TelegramApiMethod;
 	getChatMembersCount?: TelegramApiMethod;
@@ -20,19 +20,27 @@ class ApiClient implements TelegramApi {
 	sendMessage?: TelegramApiMethod;
 	setWebhook?: TelegramApiMethod;
 
-	constructor(bot_token?: string) {
-		this.bot_token = bot_token;
+	constructor(botToken?: string) {
+		this.botToken = botToken;
 	}
+
+	setBotToken = (botToken: string): void => {
+		this.botToken = botToken;
+	};
 
 	setApiData = (apiData: ApiData): void => {
 		this.apiData = apiData;
+	};
+
+	setBaseUrl = (baseUrl: string): void => {
+		this.baseUrl = baseUrl;
 	};
 
 	setEvent = (event: React.MouseEvent | React.KeyboardEvent): void => {
 		this.event = (event?.nativeEvent || event) as React.MouseEvent;
 	};
 
-	getSettings = (api_method: string, api_params: any): JQueryAjaxSettings => {
+	getOptions = (apiMethod: string, apiParams: ApiParams): APIFetchOptions => {
 		// if holding shift key while testing
 		if (this.event?.shiftKey) {
 			if (!this.apiData.use || this.apiData.use === 'SERVER') {
@@ -41,50 +49,47 @@ class ApiClient implements TelegramApi {
 				this.apiData.use = 'SERVER';
 			}
 		}
-		let data: JQueryAjaxSettings['data'];
-		let url: string;
-		const settings: JQueryAjaxSettings = {};
+		let options: APIFetchOptions = {};
 
 		if (this.apiData.use === 'BROWSER') {
-			url = this.buildUrl(api_method);
-			data = api_params;
-			settings.crossDomain = true;
+			options = {
+				data: apiParams,
+				// use absolute URL
+				url: this.buildUrl(apiMethod),
+				// override the value set by wp-api-fetch
+				credentials: 'omit',
+			};
 		} else {
-			url = this.buildUrl();
-			data = {
-				bot_token: this.bot_token,
-				api_method,
-				api_params,
+			options = {
+				data: {
+					bot_token: this.botToken,
+					api_params: apiParams,
+				},
+				// use WP REST relative path
+				path: `${this.path}/${apiMethod}`,
 			};
 		}
-		settings.url = url;
-		settings.data = JSON.stringify(data);
-		return settings;
+
+		return options;
 	};
 
-	buildUrl = (api_method?: string): string => {
+	buildUrl = (apiMethod?: string): string => {
 		if (this.apiData.use === 'BROWSER') {
-			this.base_url = 'https://api.telegram.org';
-			return `${this.base_url}/bot${this.bot_token}/${api_method}`;
+			this.setBaseUrl('https://api.telegram.org');
+			return `${this.baseUrl}/bot${this.botToken}/${apiMethod}`;
 		}
-		return (this.base_url = `${this.apiData.rest_url}/bot-api`);
+		return this.baseUrl;
 	};
 
-	sendRequest = (api_method: string, api_params: any, ajaxOverrides?: JQueryAjaxSettings): JQuery.jqXHR<any> => {
-		if (!this.bot_token) {
+	sendRequest = async <T>(apiMethod: string, apiParams: ApiParams, options?: APIFetchOptions): Promise<T> => {
+		if (!this.botToken) {
 			console.error('Bot token is empty');
 			return;
 		}
 
-		const settings: JQueryAjaxSettings = { ...this.getSettings(api_method, api_params), ...ajaxOverrides };
-		const complete = settings?.complete as JQuery.Ajax.CompleteCallback<any>;
-		settings.complete = (jqXHR, textStatus) => {
-			this.event = null;
-			if (complete) {
-				complete(jqXHR, textStatus);
-			}
-		};
-		return sendAjaxRequest(settings);
+		const fetchOptions: APIFetchOptions = { ...this.getOptions(apiMethod, apiParams), ...options };
+
+		return await fetchAPI.POST<T>(fetchOptions);
 	};
 }
 
@@ -92,8 +97,8 @@ class ApiClient implements TelegramApi {
 const botApi = new window.Proxy(new ApiClient(), {
 	get: (client, prop) => {
 		if ('undefined' === typeof client[prop]) {
-			return (api_params: any, ajaxOverrides?: JQueryAjaxSettings) => {
-				return client.sendRequest(prop as string, api_params, ajaxOverrides);
+			return async <T>(apiParams: ApiParams, options?: APIFetchOptions) => {
+				return await client.sendRequest<T>(prop as string, apiParams, options);
 			};
 		}
 		if ('function' !== typeof client[prop]) {
