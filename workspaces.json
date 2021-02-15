@@ -16,6 +16,10 @@
         "location": "domains/wptelegram/login/main"
     },
     {
+        "name": "@wp-plugins/wptelegram-login--wp-login",
+        "location": "domains/wptelegram/login/wp-login"
+    },
+    {
         "name": "@wp-plugins/wptelegram-pro--im",
         "location": "domains/wptelegram/pro/im"
     },

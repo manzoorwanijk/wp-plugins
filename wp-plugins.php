@@ -28,6 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'WP_PLUGINS_DEV_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WP_PLUGINS_DEV_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WP_PLUGINS_DEV_URL', trailingslashit( plugins_url( '', __FILE__ ) ) );
+define( 'WP_PLUGINS_DEV_LOADED', true );
 
 require_once __DIR__ . '/lib/class-wp-plgins-dev.php';
 
