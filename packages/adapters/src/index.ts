@@ -1,4 +1,5 @@
 export * from './Input';
+export * from './Link';
 export * from './Multicheck';
 export * from './Radio';
 export * from './Select';
@@ -21,7 +22,6 @@ export {
 	FormHelperText,
 	FormLabel,
 	Heading,
-	Link,
 	List,
 	ListItem,
 	Stack,

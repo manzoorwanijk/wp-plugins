@@ -6,4 +6,5 @@ export * from './useDisplayFeedback';
 export * from './usePluginData';
 export * from './useSubmitForm';
 
+export * from './utils';
 export * from './types';
