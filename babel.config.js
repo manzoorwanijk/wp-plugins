@@ -9,15 +9,12 @@ module.exports = function (api) {
 		'@babel/plugin-transform-runtime',
 	];
 
-	const productionPlugins = [];
-	if (process.env.BUILD_POT !== 'false') {
-		/* productionPlugins.push([
-			'@wordpress/babel-plugin-makepot',
-			{
-				output: './build/js-translations.pot',
-			},
-		]); */
-	}
+	const productionPlugins = [
+		'@wordpress/babel-plugin-makepot',
+		{
+			output: './build/js-translations.pot',
+		},
+	];
 
 	return {
 		presets,

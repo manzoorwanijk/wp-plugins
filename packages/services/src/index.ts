@@ -1,5 +1,4 @@
 export * from './WithDOMData';
-export * from './ajax';
 export * from './apiFetch';
 export * from './telegram';
 export * from './useDisplayFeedback';

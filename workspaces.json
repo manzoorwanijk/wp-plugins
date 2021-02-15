@@ -1,13 +1,5 @@
 [
     {
-        "name": "@wp-plugins/wptelegram--blocks",
-        "location": "domains/wptelegram/core/blocks"
-    },
-    {
-        "name": "@wp-plugins/wptelegram",
-        "location": "domains/wptelegram/core/main"
-    },
-    {
         "name": "@wp-plugins/wptelegram-login--blocks",
         "location": "domains/wptelegram/login/blocks"
     },
@@ -18,18 +10,6 @@
     {
         "name": "@wp-plugins/wptelegram-login--wp-login",
         "location": "domains/wptelegram/login/wp-login"
-    },
-    {
-        "name": "@wp-plugins/wptelegram-pro--im",
-        "location": "domains/wptelegram/pro/im"
-    },
-    {
-        "name": "@wp-plugins/wptelegram-pro",
-        "location": "domains/wptelegram/pro/main"
-    },
-    {
-        "name": "@wp-plugins/wptelegram-pro--p2tg-metabox",
-        "location": "domains/wptelegram/pro/p2tg-metabox"
     },
     {
         "name": "@wp-plugins/adapters",

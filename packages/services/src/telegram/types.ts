@@ -1,5 +1,4 @@
-import { BaseApiUtilArgs } from '../ajax/types';
-import { APIFetchOptions } from '../apiFetch';
+import { APIFetchOptions, BaseApiUtilArgs } from '../apiFetch';
 
 export type ApiParams = Partial<Record<'string', any>>;
 
