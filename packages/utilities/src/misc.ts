@@ -13,6 +13,6 @@ export const insertScript = (id: string, src: string): void => {
  * to
  * ["people", "1", "address", "0", "phones", "0", "code"]
  */
-export const strToPath = (str: string): Array<string> => str.split(/[[\].]+/);
+export const strToPath = (str: string): Array<string> => str.split(/[[\].]+/).filter(Boolean);
 
 export const sleep = (milliseconds = 0) => new Promise((resolve) => setTimeout(resolve, milliseconds));

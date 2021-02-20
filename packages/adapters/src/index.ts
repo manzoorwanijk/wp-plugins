@@ -3,6 +3,7 @@ export * from './Link';
 export * from './Multicheck';
 export * from './Radio';
 export * from './Select';
+export * from './Tabs';
 export * from './theme';
 
 export * from './types';
@@ -27,6 +28,7 @@ export {
 	Stack,
 	StackItem,
 	Switch,
+	Tab,
 	Text,
 	Tooltip,
 	useToast,
@@ -39,5 +41,6 @@ export type {
 	NumberInputProps,
 	SelectProps,
 	SwitchProps,
+	TextProps,
 	UseToastOptions,
 } from '@chakra-ui/react';

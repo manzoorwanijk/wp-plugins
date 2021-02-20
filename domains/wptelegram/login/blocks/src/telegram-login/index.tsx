@@ -1,5 +1,6 @@
-import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
+
+import { __ } from '@wp-plugins/i18n';
 
 import { blockAttributes } from './constants';
 import { TelegramLoginAtts } from './types';

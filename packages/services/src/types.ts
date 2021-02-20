@@ -3,6 +3,7 @@ import { AnyObject } from '@wp-plugins/utilities';
 export interface Plugins {
 	wptelegram: any;
 	wptelegram_login: any;
+	wptelegram_widget: any;
 }
 
 export interface ApiData {

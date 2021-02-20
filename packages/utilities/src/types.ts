@@ -1,3 +1,3 @@
-export interface AnyObject {
-	[key: string]: any;
+export interface AnyObject<T = any> {
+	[key: string]: T;
 }

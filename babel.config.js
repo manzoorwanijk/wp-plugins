@@ -10,10 +10,12 @@ module.exports = function (api) {
 	];
 
 	const productionPlugins = [
-		'@wordpress/babel-plugin-makepot',
-		{
-			output: './build/js-translations.pot',
-		},
+		[
+			'@wordpress/babel-plugin-makepot',
+			{
+				output: './build/js-translations.pot',
+			},
+		],
 	];
 
 	return {

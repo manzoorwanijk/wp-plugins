@@ -28,7 +28,7 @@ export const getErrorMessage = (error: any): string => {
 			? isNaN(errorCode)
 				? errorMessage
 				: `${errorCode} (${errorMessage})`
-			: __('Some error occured');
+			: __('Something went wrong');
 	} else {
 		result = __('Could not connect');
 	}

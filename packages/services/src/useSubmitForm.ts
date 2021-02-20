@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { assocPath } from 'ramda';
+import { last } from 'ramda';
 
 import { __ } from '@wp-plugins/i18n';
 import { GetErrorMessage, strToPath } from '@wp-plugins/utilities';
@@ -51,29 +51,29 @@ export const useSubmitForm = <FD extends FormData>({
 						const { params = {} } = data;
 
 						for (const key in params) {
-							const { message, param } = params[key];
-							// if it's a nested object
-							if (param && message) {
-								const path = strToPath(param);
-								errors = assocPath(path, message, errors);
-							} else {
-								errors = assocPath([key], getErrorMessage(key as any, 'invalid'), errors);
-							}
+							const path = strToPath(key);
+							const error = {
+								message: getErrorMessage(last(path) as any, 'invalid'),
+								type: 'submit',
+							};
+							errors[key] = error;
 						}
 					} else if ('rest_missing_callback_param' === code) {
 						data.params.forEach((key: any) => {
-							errors[key] = getErrorMessage(key, 'required');
+							const path = strToPath(key);
+							const error = {
+								message: getErrorMessage(last(path) as any, 'required'),
+								type: 'submit',
+							};
+							errors[key] = error;
 						});
 					}
 				}
 
 				// if form is provided, set field errors
 				if (form) {
-					Object.keys(errors).forEach((key) => {
-						form.setError(key as any, {
-							type: 'server',
-							message: errors[key],
-						});
+					Object.entries(errors).forEach(([key, error]) => {
+						form.setError(key as any, error);
 					});
 				}
 

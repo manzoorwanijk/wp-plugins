@@ -1,4 +1,5 @@
 import { Box, Flex, BoxProps } from '@wp-plugins/adapters';
+import { useMemo } from 'react';
 
 const commonColumnProps: BoxProps = {
 	borderWidth: '1px',
@@ -8,18 +9,28 @@ const commonColumnProps: BoxProps = {
 
 const baseColumnWidth: BoxProps['maxW'] = ['100%', '100%', '100%'];
 
-interface Cols75x25Props extends BoxProps {
+export interface ColumnsProps extends BoxProps {
 	addBorders?: boolean;
 	leftCol: React.ReactNode;
 	rightCol: React.ReactNode;
+	leftColWidth?: string;
+	rightColWidth?: string;
 }
-
-const flexBasisFirst = [...baseColumnWidth, '75%'];
-const flexBasisSecond = [...baseColumnWidth, '25%'];
 
 const pxFirst = ['0.4rem', '0.8rem'];
 
-export const Cols75x25: React.FC<Cols75x25Props> = ({ addBorders, leftCol, rightCol, children, ...rest }) => {
+export const Columns: React.FC<ColumnsProps> = ({
+	addBorders,
+	children,
+	leftCol,
+	leftColWidth = '50%',
+	rightCol,
+	rightColWidth = '50%',
+	...rest
+}) => {
+	const flexBasisFirst = useMemo(() => [...baseColumnWidth, leftColWidth], [leftColWidth]);
+	const flexBasisSecond = useMemo(() => [...baseColumnWidth, rightColWidth], [rightColWidth]);
+
 	return (
 		<Flex flexWrap='wrap' mt='1em' {...rest}>
 			<Box flexBasis={flexBasisFirst} maxW={flexBasisFirst} px='0.4rem'>

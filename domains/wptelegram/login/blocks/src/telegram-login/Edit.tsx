@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
-import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RadioControl, ToggleControl, TextControl, SelectControl } from '@wordpress/components';
 import type { BlockEditProps } from '@wordpress/blocks';
+
+import { __ } from '@wp-plugins/i18n';
 
 import { TelegramLoginAtts } from './types';
 import { useData } from './useData';

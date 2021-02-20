@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
 import { ThemeProvider } from '@wp-plugins/adapters';
-import { cleanup } from '@wp-plugins/services';
+import { cleanup, setI18nData } from '@wp-plugins/services';
 
 import App from './App';
 import { FORM_ID } from '../constants';
@@ -16,5 +16,7 @@ const ThemedApp: React.FC = () => (
 
 // clea up notifications etc.
 cleanup(FORM_ID);
+
+setI18nData('wptelegram_login', 'wptelegram-login');
 
 ReactDOM.render(<ThemedApp />, root);

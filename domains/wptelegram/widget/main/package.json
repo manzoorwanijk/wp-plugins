@@ -1,0 +1,14 @@
+{
+	"author": "WP Plugins",
+	"name": "@wp-plugins/wptelegram-widget--main",
+	"version": "1.0.0",
+	"private": true,
+	"license": "GPL-3.0",
+	"main": "src/index.ts",
+	"main:src": "src/index.ts",
+	"isCore": true,
+	"scripts": {
+		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
+		"update-deps": "npx ncu -p yarn -u"
+	}
+}

@@ -1,14 +1,18 @@
 import { __ } from '@wp-plugins/i18n';
-import { SectionCard } from '../SectionCard';
+import { SectionCard, SectionCardProps } from '../SectionCard';
 
 const headerProps = {
 	backgroundColor: '#343a40',
 	color: '#fff',
 };
 
-export const Instructions: React.FC = ({ children }) => {
+export interface InstructionsProps extends SectionCardProps {
+	highContrast?: boolean;
+}
+
+export const Instructions: React.FC<Partial<InstructionsProps>> = ({ children, highContrast = true, ...rest }) => {
 	return (
-		<SectionCard title={__('INSTRUCTIONS!')} headerProps={headerProps}>
+		<SectionCard title={__('INSTRUCTIONS!')} headerProps={highContrast && headerProps} {...rest}>
 			{children}
 		</SectionCard>
 	);

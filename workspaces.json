@@ -12,6 +12,18 @@
         "location": "domains/wptelegram/login/wp-login"
     },
     {
+        "name": "@wp-plugins/wptelegram-widget--blocks",
+        "location": "domains/wptelegram/widget/blocks"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-widget--main",
+        "location": "domains/wptelegram/widget/main"
+    },
+    {
+        "name": "@wp-plugins/wptelegram-widget--public",
+        "location": "domains/wptelegram/widget/public"
+    },
+    {
         "name": "@wp-plugins/adapters",
         "location": "packages/adapters"
     },

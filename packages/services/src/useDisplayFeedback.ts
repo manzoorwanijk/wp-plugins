@@ -43,6 +43,7 @@ export const useDisplayFeedback = (): DF => {
 	const displayErrors = useCallback(
 		(errors: AnyObject) => {
 			const errorStrings = getErrorStrings(errors);
+			console.log({ errorStrings, errors });
 			errorStrings.forEach((error) => displayError({ title: error }));
 		},
 		[displayError]

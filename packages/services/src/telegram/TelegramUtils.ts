@@ -139,9 +139,9 @@ export const testBotToken: TestBotToken = async (args, event) => {
 
 	try {
 		const { result } = await botApi.getMe({});
-		setResultType('SUCCESS');
+		setResultType?.('SUCCESS');
 
-		onComplete(bot_token, result);
+		onComplete?.(bot_token, result);
 
 		setResult(`${result.first_name} (@${result.username})`);
 	} catch (error) {
@@ -150,7 +150,7 @@ export const testBotToken: TestBotToken = async (args, event) => {
 		setResultType?.('ERROR');
 		setResult?.(getErrorMessage(error));
 
-		onComplete(bot_token, {});
+		onComplete?.(bot_token, {});
 	} finally {
 		setInProgress?.(false);
 	}

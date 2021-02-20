@@ -26,7 +26,7 @@ export type TelegramApiUtil<A extends TelegramApiUtilBaseArgs = TelegramApiUtilB
 ) => Promise<T>;
 
 export interface TestBotTokenArgs extends TelegramApiUtilBaseArgs {
-	onComplete: (bot_token: string, result: any) => void;
+	onComplete?: (bot_token: string, result: any) => void;
 }
 
 export type TestBotToken = TelegramApiUtil<TestBotTokenArgs>;

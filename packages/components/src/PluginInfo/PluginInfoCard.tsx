@@ -2,6 +2,7 @@ import { __, sprintf } from '@wp-plugins/i18n';
 import { Box, Stack, Text, BoxProps, Link } from '@wp-plugins/adapters';
 import { Smile } from '../Smile';
 import { SectionCard } from '../SectionCard';
+import { Description } from '../Description';
 
 const StackItem: React.FC<BoxProps> = (props) => {
 	return <Box p='1em' textAlign='center' borderBottom='1px' borderBottomColor='gray.200' width='100%' {...props} />;
@@ -33,9 +34,7 @@ export const PluginInfoCard: React.FC<PluginInfoCardProps> = ({
 		<SectionCard title={title} border='1px' borderColor='gray.200' bodyProps={bodyProps}>
 			<Stack spacing={1} align='center'>
 				<StackItem>
-					<Text as='p' fontStyle='italic' textAlign='start'>
-						{description}
-					</Text>
+					<Description textAlign='start'>{description}</Description>
 				</StackItem>
 				{socialIcons && <StackItem>{socialIcons}</StackItem>}
 				{reviewLink && (
