@@ -1,4 +1,4 @@
-import { OptionsType } from '@wp-plugins/adapters';
+import { OptionsType, ButtonProps } from '@wp-plugins/adapters';
 import { AdapterPropsMap } from './adapters';
 
 export type FieldType = keyof AdapterPropsMap;
@@ -23,7 +23,7 @@ export type FormFieldProps<FT extends FieldType, V extends FieldValue> = Omit<Ad
 	label?: React.ReactNode;
 	name: string;
 	options?: OptionsType;
-};
+} & (FT extends 'text.button' ? { button?: React.ComponentType<ButtonProps> } : unknown);
 
 export type RenderFieldProps<FT extends FieldType, V extends FieldValue> = FormFieldProps<FT, V> & {
 	error?: string;

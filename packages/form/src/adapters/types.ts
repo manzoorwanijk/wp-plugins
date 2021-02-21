@@ -9,6 +9,7 @@ import {
 
 export interface AdapterPropsMap {
 	text: TextInputProps;
+	'text.button': TextInputProps;
 	number: NumberInputProps;
 	select: SelectProps;
 	switch: SwitchProps;

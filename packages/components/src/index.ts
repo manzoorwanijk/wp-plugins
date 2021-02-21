@@ -10,3 +10,5 @@ export * from './Smile';
 export * from './TestResult';
 export * from './WPTGSocialIcons';
 export * from './WidgetInfo';
+export * from './useBotTokenTest';
+export * from './useChatWithTest';

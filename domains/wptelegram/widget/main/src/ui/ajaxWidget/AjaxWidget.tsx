@@ -12,16 +12,9 @@ export const AjaxWidget: React.FC = () => {
 			<Description>
 				{__('Ajax widget is a beautiful scrollable widget which only supports channels.')}
 			</Description>
-			<Description fontStyle='normal'>
-				{__('Note:')}
-				&nbsp;
-				{__('You can set the default values below.')}
-				&nbsp;
-				{__('You can also set all these fields via shortcodes and widgets.')}
-			</Description>
 			<FormField
 				addonBefore='@'
-				description={__('Default channel username.')}
+				description={__('Channel username.')}
 				fieldType='text'
 				label={getFieldLabel('username')}
 				maxW='200px'

@@ -36,6 +36,7 @@ export {
 
 export type {
 	BoxProps,
+	ButtonProps,
 	CodeProps,
 	StackProps,
 	NumberInputProps,

@@ -5,6 +5,13 @@ import './style.scss';
 $(() => {
 	const iframe = $('.wptelegram-widget-message iframe');
 
+	iframe.on('resize_iframe', function () {
+		const $this = $(this);
+		const height = $this.contents().find('body').height();
+
+		$this.height(height);
+	});
+
 	iframe.on('load', function () {
 		const $this = $(this);
 		if ($this.contents().find('body').is(':empty')) {
@@ -14,7 +21,7 @@ $(() => {
 		}
 	});
 
-	iframe.on('resize_iframe', function () {
-		$(this).height($(this).contents().find('body').height());
+	$(window).on('resize', () => {
+		iframe.trigger('resize_iframe');
 	});
 });

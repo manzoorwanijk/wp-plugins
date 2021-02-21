@@ -55,6 +55,7 @@ export const Instructions: React.FC = () => {
 						)}
 					</ListItem>
 					<ListItem>{__('Add the Bot as Administrator to your Channel/Group.')}</ListItem>
+					<ListItem>{__('Send a test message to see if we did it right.')}</ListItem>
 					<ListItem>
 						<Text as='span' color='red.600' fontWeight='500'>
 							{__('For groups, disable group privacy for the bot.')}

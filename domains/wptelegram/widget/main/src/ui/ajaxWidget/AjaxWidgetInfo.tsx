@@ -10,8 +10,8 @@ export const AjaxWidgetInfo = () => {
 			adminUrl={admin_url}
 			phpCode={`if ( function_exists( 'wptelegram_ajax_widget' ) ) {\n\twptelegram_ajax_widget();\n}`}
 			title={__('WP Telegram Ajax Widget')}
-			shortcode1='[wptelegram-ajax-widget widget_width="100%" widget_height="500"]'
-			shortcode2='[wptelegram-ajax-widget widget_width="98%" widget_height="700"]'
+			shortcode1='[wptelegram-ajax-widget width="100%" height="500px"]'
+			shortcode2='[wptelegram-ajax-widget width="98%" height="700px"]'
 		/>
 	);
 };

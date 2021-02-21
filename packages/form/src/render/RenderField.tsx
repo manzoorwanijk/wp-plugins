@@ -9,21 +9,25 @@ import { RenderFieldProps, FieldValue, FieldType } from '../types';
 import { Adapter } from '../adapters';
 import { RenderErrorMessage } from './RenderErrorMessage';
 
-export const RenderField = <FT extends FieldType, V extends FieldValue>({
-	after,
-	before,
-	controlClassName,
-	description,
-	error,
-	fieldRef,
-	fieldType,
-	id,
-	info,
-	isRequired,
-	label,
-	name,
-	...rest
-}: RenderFieldProps<FT, V>): JSX.Element => {
+export const RenderField = <FT extends FieldType, V extends FieldValue>(
+	props: RenderFieldProps<FT, V>
+): JSX.Element => {
+	const {
+		after,
+		before,
+		controlClassName,
+		description,
+		error,
+		fieldRef,
+		fieldType,
+		id,
+		info,
+		isRequired,
+		label,
+		name,
+		...rest
+	} = props as any;
+
 	const className = classNames('form-control', `form-control-${fieldType}`, controlClassName);
 
 	const tooltipKey = info ? name + '-tooltip' : null;
@@ -47,6 +51,7 @@ export const RenderField = <FT extends FieldType, V extends FieldValue>({
 				<Adapter
 					aria-label={label as string}
 					aria-describedby={tooltipKey}
+					error={error}
 					fieldRef={fieldRef}
 					fieldType={fieldType}
 					id={fieldId}
