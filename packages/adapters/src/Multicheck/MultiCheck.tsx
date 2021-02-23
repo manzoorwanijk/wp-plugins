@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Checkbox, CheckboxGroup, CheckboxGroupProps, Stack, StackProps } from '@chakra-ui/react';
 
 import { OptionsType } from '../types';
@@ -11,35 +11,29 @@ export interface MultiCheckProps extends CheckboxGroupProps {
 
 const dir: StackProps['direction'] = ['column', 'row'];
 
-export const MultiCheck = forwardRef<HTMLInputElement, MultiCheckProps>(
-	({ children, options, isInline, name, ...restProps }, ref) => {
-		const childNodes = useMemo(() => {
-			// make sure the value is array
-			const fieldValue = restProps.value || [];
-			return options?.map(({ label, value, ...rest }, index) => {
-				return (
-					<Checkbox
-						value={value}
-						{...rest}
-						isChecked={fieldValue.includes(value)}
-						name={`${name}[]`}
-						key={`${value}${index}`}
-						ref={ref}
-					>
-						{label}
-					</Checkbox>
-				);
-			});
-		}, [name, options, ref, restProps.value]);
+export const MultiCheck: React.FC<MultiCheckProps> = ({ children, options, isInline, ...restProps }) => {
+	const childNodes = useMemo(() => {
+		return options?.map(({ label, value, ...rest }, index) => {
+			return (
+				<Checkbox value={value} {...rest} key={`${value}${index}`}>
+					{label}
+				</Checkbox>
+			);
+		});
+	}, [options]);
 
-		const direction = isInline ? dir : 'column';
+	// make sure the value is array
+	const value = useMemo(() => (restProps.value === undefined ? restProps.value : restProps.value || []), [
+		restProps.value,
+	]);
 
-		return (
-			<CheckboxGroup {...restProps}>
-				<Stack direction={direction} spacing='0.5em'>
-					{childNodes || children}
-				</Stack>
-			</CheckboxGroup>
-		);
-	}
-);
+	const direction = isInline ? dir : 'column';
+
+	return (
+		<CheckboxGroup {...restProps} value={value}>
+			<Stack direction={direction} spacing='0.5em'>
+				{childNodes || children}
+			</Stack>
+		</CheckboxGroup>
+	);
+};

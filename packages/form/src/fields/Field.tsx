@@ -7,11 +7,8 @@ import { FormFieldProps, FieldValue, FieldType } from '../types';
 import { RenderField } from '../render';
 import { useFieldConditions } from '../hooks';
 
-export const Field = <FT extends FieldType, V extends FieldValue>({
-	conditions,
-	valueAsNumber,
-	...props
-}: FormFieldProps<FT, V>): JSX.Element => {
+export const Field = <FT extends FieldType, V extends FieldValue>(props: FormFieldProps<FT, V>): JSX.Element => {
+	const { conditions, valueAsNumber, ...rest } = props as any;
 	const { register, errors } = useFormContext();
 	const conditionsApply = useFieldConditions(props.name, conditions);
 
@@ -22,7 +19,7 @@ export const Field = <FT extends FieldType, V extends FieldValue>({
 			<RenderField
 				fieldRef={register({ required: props.isRequired, valueAsNumber })}
 				error={path(fieldPath, errors)}
-				{...(props as FormFieldProps<FT, V>)}
+				{...rest}
 			/>
 		)
 	);

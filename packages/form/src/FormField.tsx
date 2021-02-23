@@ -10,7 +10,7 @@ export const FormField = <FT extends FieldType, V extends FieldValue>(props: For
 		throw new Error('fieldType is required');
 	}
 
-	const { isRepeatable, ...rest } = props;
+	const { isRepeatable, ...rest } = props as any;
 
 	if (isRepeatable) {
 		return null; // <Repeatable {...rest} />;

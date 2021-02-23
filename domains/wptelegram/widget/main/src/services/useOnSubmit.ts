@@ -12,7 +12,7 @@ export const useOnSubmit = (form: UseFormMethods<FormData>): SubmitHandler<FormD
 
 	const path = `${rest_namespace}/settings`;
 
-	const submitForm = useSubmitForm<FormData>({ form, path, getErrorMessage });
+	const submitForm = useSubmitForm<FormData>({ form, path, getErrorMessage } as any);
 
 	return useCallback(async (data) => await submitForm(data), [submitForm]);
 };

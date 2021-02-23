@@ -1,8 +1,9 @@
-import { MultiCheck, NumberInput, Select, Switch, TextInput } from '@wp-plugins/adapters';
+import { NumberInput, Select, Switch, TextInput } from '@wp-plugins/adapters';
 
 import { RenderFieldProps, FieldType, FieldValue } from '../types';
 import { AdapterPropsMap } from './types';
 import { Radio } from './Radio';
+import { MultiCheck } from './MultiCheck';
 import { TextWithButton } from './TextWithButton';
 
 export const adapterMap: {
@@ -19,7 +20,7 @@ export const adapterMap: {
 
 const DefaultComponent = () => null;
 
-const nonRefTypes: Array<FieldType> = ['radio'];
+const nonRefTypes: Array<FieldType> = ['radio', 'multicheck'];
 
 export const Adapter = <FT extends FieldType, V extends FieldValue>(props: RenderFieldProps<FT, V>): JSX.Element => {
 	const { fieldType, fieldRef, ...rest } = props as any;

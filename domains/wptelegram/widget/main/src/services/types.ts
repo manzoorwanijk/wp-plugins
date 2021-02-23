@@ -43,9 +43,3 @@ export interface FormData {
 	legacy_widget: LegacyWidgetFields;
 	advanced: AdvancedFields;
 }
-
-declare global {
-	interface Window {
-		wptelegram_widget: WPTelegramWidgetData;
-	}
-}

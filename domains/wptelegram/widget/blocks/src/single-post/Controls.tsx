@@ -1,5 +1,6 @@
 import { Fragment } from '@wordpress/element';
 import { BlockAlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
+// @ts-ignore
 import { PanelBody, ToggleControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 
 import { __ } from '@wp-plugins/i18n';

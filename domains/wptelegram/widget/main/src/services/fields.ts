@@ -53,11 +53,11 @@ const ajaxWidgetSchema = {
 		message: () => getErrorMessage('username', 'invalid'),
 		excludeEmptyString: true,
 	}),
-	width: yup.string().matches(/^[1-9]*?[0-9]*?%?$/, {
+	width: yup.string().matches(/^[1-9]*?[0-9]*?(?:px|r?em|%)?$/, {
 		message: () => getErrorMessage('width', 'invalid'),
 		excludeEmptyString: true,
 	}),
-	height: yup.string().matches(/^[1-9]*?[0-9]*?$/, {
+	height: yup.string().matches(/^[1-9]*?[0-9]*?(?:px|r?em|%)?$/i, {
 		message: () => getErrorMessage('height', 'invalid'),
 		excludeEmptyString: true,
 	}),
