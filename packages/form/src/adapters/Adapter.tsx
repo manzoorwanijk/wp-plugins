@@ -1,21 +1,24 @@
-import { NumberInput, Select, Switch, TextInput } from '@wp-plugins/adapters';
+import { NumberInput, Select, Switch, Textarea, TextInput } from '@wp-plugins/adapters';
 
 import { RenderFieldProps, FieldType, FieldValue } from '../types';
 import { AdapterPropsMap } from './types';
 import { Radio } from './Radio';
 import { MultiCheck } from './MultiCheck';
 import { TextWithButton } from './TextWithButton';
+import { Hidden } from './Hidden';
 
 export const adapterMap: {
 	[K in FieldType]: React.ComponentType<AdapterPropsMap[K]>;
 } = {
-	text: TextInput,
-	'text.button': TextWithButton,
+	hidden: Hidden,
+	multicheck: MultiCheck,
 	number: NumberInput,
+	radio: Radio,
 	select: Select,
 	switch: Switch,
-	multicheck: MultiCheck,
-	radio: Radio,
+	text: TextInput,
+	textarea: Textarea,
+	'text.button': TextWithButton,
 };
 
 const DefaultComponent = () => null;

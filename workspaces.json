@@ -1,5 +1,9 @@
 [
     {
+        "name": "@wp-plugins/wptelegram-comments--main",
+        "location": "domains/wptelegram/comments/main"
+    },
+    {
         "name": "@wp-plugins/wptelegram-login--blocks",
         "location": "domains/wptelegram/login/blocks"
     },

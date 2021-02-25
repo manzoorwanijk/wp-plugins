@@ -10,14 +10,13 @@ const Sidebar: React.FC = () => {
 		pluginInfo: { title },
 		assets: { tgIconUrl },
 	} = useData();
+
 	return (
 		<Box>
 			<PluginInfoCard
-				description={__(
-					'Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.'
-				)}
+				description={__('Use Telegram Comments widget for your WordPress posts or pages.')}
 				helpText={__('Get LIVE support on Telegram')}
-				reviewLink='https://wordpress.org/support/plugin/wptelegram-widget/reviews/#new-post'
+				reviewLink='https://wordpress.org/support/plugin/wptelegram-comments/reviews/#new-post'
 				supportLink='https://t.me/WPTelegramChat'
 				supportLinkText='@WPTelegramChat'
 				socialIcons={<WPTGSocialIcons tgIconUrl={tgIconUrl} />}

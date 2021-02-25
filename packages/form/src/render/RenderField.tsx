@@ -34,6 +34,11 @@ export const RenderField = <FT extends FieldType, V extends FieldValue>(
 
 	const fieldId = id || name;
 
+	// no layout stuff needed for hidden field
+	if (fieldType === 'hidden') {
+		return <Adapter fieldType={fieldType} fieldRef={fieldRef} id={fieldId} name={name} {...rest} />;
+	}
+
 	return (
 		<FormControl isInvalid={Boolean(error)} isRequired={isRequired} className={className}>
 			{label ? (

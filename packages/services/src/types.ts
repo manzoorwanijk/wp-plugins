@@ -4,6 +4,7 @@ export interface Plugins {
 	wptelegram: any;
 	wptelegram_login: any;
 	wptelegram_widget: any;
+	wptelegram_comments: any;
 }
 
 export interface ApiData {

@@ -1,18 +1,22 @@
 import {
-	TextInputProps,
+	MultiCheckProps,
 	NumberInputProps,
+	RadioProps,
 	SelectProps,
 	SwitchProps,
-	MultiCheckProps,
-	RadioProps,
+	TextInputProps,
+	TextareaProps,
 } from '@wp-plugins/adapters';
+import { HiddenProps } from './Hidden';
 
 export interface AdapterPropsMap {
-	text: TextInputProps;
-	'text.button': TextInputProps;
+	hidden: HiddenProps;
+	multicheck: MultiCheckProps;
 	number: NumberInputProps;
+	radio: RadioProps;
 	select: SelectProps;
 	switch: SwitchProps;
-	multicheck: MultiCheckProps;
-	radio: RadioProps;
+	text: TextInputProps;
+	textarea: TextareaProps;
+	'text.button': TextInputProps;
 }

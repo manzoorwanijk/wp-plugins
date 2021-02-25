@@ -22,32 +22,6 @@ export const fieldLabels = {
 
 export const getFieldLabel = fieldLabelGetter(fieldLabels);
 
-export const ok = {
-	ajax_widget: {
-		username: 'gh',
-		width: '',
-		height: '',
-	},
-	legacy_widget: {
-		username: '',
-		bot_token: '',
-		width: '',
-		author_photo: 'auto',
-		num_messages: '',
-	},
-	join_link: {
-		url: '',
-		text: '',
-		post_types: [],
-		priority: '10',
-		position: 'after_content',
-	},
-	advanced: {
-		telegram_blocked: true,
-		google_script_url: '',
-	},
-};
-
 const ajaxWidgetSchema = {
 	username: yup.string().matches(TG_USERNAME_REGEX, {
 		message: () => getErrorMessage('username', 'invalid'),

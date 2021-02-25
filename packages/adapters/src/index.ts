@@ -30,6 +30,7 @@ export {
 	Switch,
 	Tab,
 	Text,
+	Textarea,
 	Tooltip,
 	useToast,
 } from '@chakra-ui/react';
@@ -42,6 +43,7 @@ export type {
 	NumberInputProps,
 	SelectProps,
 	SwitchProps,
+	TextareaProps,
 	TextProps,
 	UseToastOptions,
 } from '@chakra-ui/react';
