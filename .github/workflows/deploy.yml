@@ -1,0 +1,46 @@
+name: Build and Deploy Assets
+on:
+  push:
+    branches: [master]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        domain: [wptelegram-login, wptelegram-widget, wptelegram-comments]
+    name: Deploy ${{ matrix.domain }} Assets
+    steps:
+      - name: Checkout the commit
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: dcodeIO/setup-node-nvm@master
+        with:
+          node-version: lts/*
+
+      - name: Cache dependencies
+        id: cache-deps
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        # install deps only if cache hit
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Build ${{ matrix.domain }}
+        run: yarn build:${{ matrix.domain }}
+
+      - name: Deploy to ${{ matrix.domain }}
+        uses: manzoorwanijk/action-deploy-to-repo@master
+        with:
+          access_token: ${{ secrets.MY_ACCESS_TOKEN }}
+          src_dir: build
+          target_owner: manzoorwanijk
+          target_repo: ${{ matrix.domain }}
+          target_dir: src/assets
+          target_branch: develop
+          cleanup_command: 'rm -rf src/assets/static/* && rm -f src/assets/asset-manifest.json'
+          precommit_command: 'mv src/assets/*.pot src/languages/'
