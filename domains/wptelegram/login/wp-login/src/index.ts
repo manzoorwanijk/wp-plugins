@@ -3,7 +3,8 @@ import $ from 'jquery';
 import './style.scss';
 
 $(() => {
-	const loginForm = $('input[type="password"]').closest('form');
+	const loginForm = $('form[name="loginform"],form[name="registerform"]');
+
 	if (!loginForm.length) {
 		return;
 	}
