@@ -1,0 +1,29 @@
+@import '~@wp-plugins/adapters/src/theme/variables';
+
+#wptelegram-settings {
+	.custom-rules {
+		.rule-set {
+			.form-control {
+				.chakra-select__wrapper {
+					max-width: 100%;
+				}
+				@media screen and (min-width: $breakpointSm) {
+					&.operator {
+						max-width: 100px;
+					}
+				}
+				padding-top: 0.3em;
+				padding-bottom: 0.3em;
+				margin-inline-end: 0.2em;
+			}
+			.input-group {
+				@media screen and (max-width: $breakpointSm) {
+					flex-direction: column;
+				}
+			}
+			@media screen and (max-width: $breakpointSm) {
+				flex-direction: column;
+			}
+		}
+	}
+}

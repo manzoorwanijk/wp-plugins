@@ -12,7 +12,7 @@ export const MemberCountResult: React.FC<MemberCountResultProps> = ({ memberCoun
 
 	return result.length ? (
 		<Box mt='1em'>
-			<Text>{__('Members Count:')}</Text>
+			<Text color='gray.500'>{__('Members Count:')}</Text>
 			{result.map(([chat_id, result]) => {
 				return (
 					<Flex key={chat_id} py='1em'>

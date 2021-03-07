@@ -1,7 +1,7 @@
 import { Form, yupResolver, useForm } from '@wp-plugins/form';
 import { Cols75x25 } from '@wp-plugins/components';
 
-import { useData, validationSchema, FormData } from '../services';
+import { useData, validationSchema, DataShape } from '../services';
 import { FORM_ID } from '../constants';
 import { LoginOptions } from './LoginOptions';
 import { TelegramOptions } from './TelegramOptions';
@@ -13,14 +13,14 @@ import { SubmitInfo } from './SubmitInfo';
 import { Instructions } from './Instructions';
 import { useInit, useOnSubmit, useOnInvalid } from '../services';
 
-const resolver = yupResolver<FormData>(validationSchema);
+const resolver = yupResolver<DataShape>(validationSchema);
 
 const App: React.FC = () => {
 	useInit();
 
 	const { savedSettings: defaultValues } = useData();
 
-	const form = useForm<FormData>({ defaultValues, resolver, mode: 'onBlur' });
+	const form = useForm<DataShape>({ defaultValues, resolver, mode: 'onBlur' });
 
 	const onSubmit = useOnSubmit(form);
 

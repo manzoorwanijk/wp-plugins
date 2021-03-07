@@ -1,7 +1,7 @@
 import type { BaseAssetsData, BaseDOMData, BasePluginData } from '@wp-plugins/services';
 import type { OptionsType } from '@wp-plugins/adapters';
 
-export interface WPTelegramCommentsData extends BaseDOMData<AssetsData>, BasePluginData<FormData, UiData> {}
+export interface WPTelegramCommentsData extends BaseDOMData<AssetsData>, BasePluginData<DataShape, UiData> {}
 
 export interface AssetsData extends BaseAssetsData {
 	tgIconUrl: string;
@@ -11,7 +11,7 @@ export interface UiData {
 	post_types: OptionsType;
 }
 
-export interface FormData {
+export interface DataShape {
 	attributes?: string;
 	code: string;
 	exclude?: string;

@@ -1,6 +1,6 @@
 import type { BaseAssetsData, BaseDOMData, BasePluginData } from '@wp-plugins/services';
 
-export interface WPTelegramWidgetData extends BaseDOMData<AssetsData>, BasePluginData<FormData, UiData> {}
+export interface WPTelegramWidgetData extends BaseDOMData<AssetsData>, BasePluginData<{}, UiData> {}
 
 export interface AssetsData extends BaseAssetsData {
 	message_view_url: string;

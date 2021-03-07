@@ -6,7 +6,7 @@ import App from './App';
 const dummyDOMData: WPTelegramWidgetData = {
 	api: {
 		admin_url: window.location.href,
-		use: 'SERVER',
+		use: 'BROWSER',
 	},
 	assets: {
 		logoUrl: 'https://ps.w.org/wptelegram/assets/icon-128x128.png',

@@ -1,1 +1,1 @@
-export { InfoOutlineIcon, WarningIcon } from '@chakra-ui/icons';
+export { AddIcon, CloseIcon, InfoOutlineIcon, WarningIcon } from '@chakra-ui/icons';

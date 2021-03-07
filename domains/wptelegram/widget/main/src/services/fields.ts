@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 import { __ } from '@wp-plugins/i18n';
 import { fieldLabelGetter, getFormErrorMessage, BOT_TOKEN_REGEX, TG_USERNAME_REGEX } from '@wp-plugins/utilities';
-import { FormData } from './types';
+import { DataShape } from './types';
 
 export const fieldLabels = {
 	bot_token: () => __('Bot Token'),
@@ -52,7 +52,7 @@ export const validationSchema = yup.object({
 				return username ? schema.required(() => getErrorMessage('bot_token', 'required')) : schema;
 			}),
 		author_photo: yup
-			.mixed<FormData['legacy_widget']['author_photo']>()
+			.mixed<DataShape['legacy_widget']['author_photo']>()
 			.oneOf(['auto', 'always_show', 'always_hide']),
 		num_messages: yup.string().matches(/^[1-5]?[0-9]?$/, {
 			message: () => getErrorMessage('num_messages', 'invalid'),
@@ -66,7 +66,7 @@ export const validationSchema = yup.object({
 			.url(() => getErrorMessage('url', 'invalid')),
 		text: yup.string().nullable(),
 		post_types: yup.array().of(yup.string()),
-		position: yup.mixed<FormData['join_link']['position']>().oneOf(['before_content', 'after_content']),
+		position: yup.mixed<DataShape['join_link']['position']>().oneOf(['before_content', 'after_content']),
 		priority: yup.string().matches(/^[0-9]*$/, {
 			message: () => getErrorMessage('priority', 'invalid'),
 			excludeEmptyString: true,

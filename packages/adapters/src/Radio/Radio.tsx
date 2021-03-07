@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import {
 	Radio as CharaRadio,
 	RadioGroup,
@@ -18,14 +18,16 @@ const dir: StackProps['direction'] = ['column', 'row'];
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
 	({ children, options, isInline, name, ...restProps }, ref) => {
-		const childNodes = options?.map(({ label, value, ...rest }, index) => {
-			const key = `${value}${index}`;
-			return (
-				<CharaRadio id={key} {...rest} value={value} key={key}>
-					{label}
-				</CharaRadio>
-			);
-		});
+		const childNodes = useMemo(() => {
+			return options?.map(({ label, value, ...rest }, index) => {
+				const key = `${name}-${value}-${index}`;
+				return (
+					<CharaRadio id={key} {...rest} value={value} key={key}>
+						{label}
+					</CharaRadio>
+				);
+			});
+		}, [name, options]);
 
 		const direction = isInline ? dir : 'column';
 

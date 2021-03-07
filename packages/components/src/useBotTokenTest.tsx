@@ -9,12 +9,14 @@ import { TestResult } from './TestResult';
 export type BotTokenTest = {
 	button: React.ReactNode;
 	result: React.ReactNode;
+	bot_username?: string;
 };
 
 export const useBotTokenTest = (bot_token: string, hasError?: boolean): BotTokenTest => {
 	const [testingBotToken, setTestingBotToken] = useState(false);
 
 	const [botTokenTestResult, setBotTokenTestResult] = useState('');
+	const [bot_username, setBotUsername] = useState('');
 
 	const [botTokenTestResultType, setBotTokenTestResultType] = useState<ResultType>();
 
@@ -26,6 +28,11 @@ export const useBotTokenTest = (bot_token: string, hasError?: boolean): BotToken
 					setInProgress: setTestingBotToken,
 					setResult: setBotTokenTestResult,
 					setResultType: setBotTokenTestResultType,
+					onComplete: (token, { username }) => {
+						if (username) {
+							setBotUsername(username);
+						}
+					},
 				},
 				event
 			);
@@ -42,6 +49,6 @@ export const useBotTokenTest = (bot_token: string, hasError?: boolean): BotToken
 
 		const result = <TestResult result={botTokenTestResult} resultType={botTokenTestResultType} />;
 
-		return { button, result };
-	}, [botTokenTestResult, botTokenTestResultType, bot_token, hasError, onClickTest, testingBotToken]);
+		return { button, result, bot_username };
+	}, [botTokenTestResult, botTokenTestResultType, bot_token, bot_username, hasError, onClickTest, testingBotToken]);
 };

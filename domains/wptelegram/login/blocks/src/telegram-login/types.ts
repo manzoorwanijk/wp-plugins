@@ -1,7 +1,7 @@
 import type { BaseAssetsData, BaseDOMData, BasePluginData } from '@wp-plugins/services';
 import type { OptionsType } from '@wp-plugins/adapters';
 
-export interface WPTelegramLoginData extends BaseDOMData<AssetsData>, BasePluginData<FormData, UiData> {}
+export interface WPTelegramLoginData extends BaseDOMData<AssetsData>, BasePluginData<{}, UiData> {}
 
 export interface AssetsData extends BaseAssetsData {
 	loginImageUrl: string;

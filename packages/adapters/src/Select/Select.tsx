@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Select as ChakraSelect, SelectProps as ChakraSelectProps } from '@chakra-ui/react';
 
 import { OptionsType } from '../types';
@@ -10,8 +10,8 @@ export interface SelectProps extends ChakraSelectProps {
 const rootProps = { maxW: 'max-content' };
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(({ options, children, ...selectProps }, ref) => {
-	const childNodes: React.ReactNode = options?.map(
-		({ label, options: optionGroups, value, ...optionProps }, index) => {
+	const childNodes = useMemo<React.ReactNode>(() => {
+		return options?.map(({ label, options: optionGroups, value, ...optionProps }, index) => {
 			if (optionGroups?.length && label) {
 				return (
 					<optgroup label={label as string} key={`${label}${index}`} {...optionProps}>
@@ -28,8 +28,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({ options, chi
 					{label}
 				</option>
 			);
-		}
-	);
+		});
+	}, [options]);
 
 	return (
 		<ChakraSelect rootProps={rootProps} ref={ref} {...selectProps}>

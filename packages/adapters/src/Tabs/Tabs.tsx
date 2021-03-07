@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Tabs as ChakraTabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Tabs as ChakraTabs, TabsProps as ChakraTabsProps, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { append } from 'ramda';
 
 export interface TabItemProps {
@@ -11,13 +11,13 @@ export interface TabItem extends TabItemProps {
 	Component: React.ComponentType;
 }
 
-export interface TabsProps {
+export interface TabsProps extends Partial<ChakraTabsProps> {
 	items: Array<TabItem>;
 	renderTab?: (props: TabItemProps) => JSX.Element;
 	renderPanel?: (props: TabItemProps) => JSX.Element;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ items, renderPanel, renderTab }) => {
+export const Tabs: React.FC<TabsProps> = ({ items, renderPanel, renderTab, ...rest }) => {
 	const { tabList, tabPanels } = useMemo(() => {
 		return items.reduce(
 			(prevValue, { Component, id, title }, index) => {
@@ -42,7 +42,7 @@ export const Tabs: React.FC<TabsProps> = ({ items, renderPanel, renderTab }) => 
 	}, [items, renderPanel, renderTab]);
 
 	return (
-		<ChakraTabs>
+		<ChakraTabs {...rest}>
 			<TabList>{tabList}</TabList>
 			<TabPanels>{tabPanels}</TabPanels>
 		</ChakraTabs>

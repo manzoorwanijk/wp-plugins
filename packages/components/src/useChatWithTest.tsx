@@ -26,6 +26,7 @@ export const useChatWithTest = (bot_token?: string): ChatWithTest => {
 	const onClickTest = useCallback(
 		(chatId): React.MouseEventHandler => async (event) => {
 			const chat_id = TG_USERNAME_REGEX.test(chatId) ? `@${chatId}` : chatId;
+			setMemberCountResult({});
 			await sendTestMessage(
 				{
 					bot_token,
@@ -51,6 +52,7 @@ export const useChatWithTest = (bot_token?: string): ChatWithTest => {
 
 	const onBlur = useCallback<React.FocusEventHandler<HTMLInputElement>>(
 		async ({ nativeEvent: e }) => {
+			setTestMessageResult({});
 			const chatId = (e.target as HTMLInputElement)?.value;
 			if (!bot_token || !chatId || checkingMemberCount[chatId]) {
 				return;
@@ -85,6 +87,7 @@ export const useChatWithTest = (bot_token?: string): ChatWithTest => {
 			<Button
 				isDisabled={!bot_token || isDisabled || Boolean(sendingTestMessage) || !chat_id}
 				onClick={onClickTest(chat_id)}
+				borderStartRadius='0'
 			>
 				{sendingTestMessage && sendingTestMessage === chat_id ? __('Please wait…') : __('Send Test')}
 			</Button>

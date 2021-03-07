@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { SubmitErrorHandler } from '@wp-plugins/form';
 import { useDisplayFeedback } from '@wp-plugins/services';
 
-import { FormData } from './types';
+import { DataShape } from './types';
 
-export const useOnInvalid = (): SubmitErrorHandler<FormData> => {
+export const useOnInvalid = (): SubmitErrorHandler<DataShape> => {
 	const { displayValidationErrors } = useDisplayFeedback();
 
 	return useCallback((errors) => displayValidationErrors(errors), [displayValidationErrors]);

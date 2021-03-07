@@ -4,6 +4,10 @@
         "location": "domains/wptelegram/comments/main"
     },
     {
+        "name": "@wp-plugins/wptelegram--main",
+        "location": "domains/wptelegram/core/main"
+    },
+    {
         "name": "@wp-plugins/wptelegram-login--blocks",
         "location": "domains/wptelegram/login/blocks"
     },

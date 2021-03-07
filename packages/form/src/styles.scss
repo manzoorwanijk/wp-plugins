@@ -1,7 +1,11 @@
 .form-control {
 	padding-bottom: 1.5em;
 	padding-top: 1.5em;
-	display: flex;
+	&__input {
+		input:read-only {
+			background-color: #eee;
+		}
+	}
 	@media screen and (max-width: 600px) {
 		flex-wrap: wrap;
 	}
@@ -14,8 +18,8 @@
 	}
 	&__input {
 		flex-basis: 100%;
-		input:read-only {
-			background-color: #eee;
-		}
+	}
+	&:not(.no-flex) {
+		display: flex;
 	}
 }

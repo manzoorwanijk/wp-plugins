@@ -1,7 +1,7 @@
 import type { BaseAssetsData, BaseDOMData, BasePluginData } from '@wp-plugins/services';
 import type { OptionsType } from '@wp-plugins/adapters';
 
-export interface WPTelegramLoginData extends BaseDOMData<AssetsData>, BasePluginData<FormData, UiData> {}
+export interface WPTelegramLoginData extends BaseDOMData<AssetsData>, BasePluginData<DataShape, UiData> {}
 
 export interface AssetsData extends BaseAssetsData {
 	tgIconUrl: string;
@@ -12,7 +12,7 @@ export interface UiData {
 	user_role: OptionsType;
 }
 
-export interface FormData {
+export interface DataShape {
 	avatar_meta_key?: string;
 	bot_token: string;
 	bot_username: string;

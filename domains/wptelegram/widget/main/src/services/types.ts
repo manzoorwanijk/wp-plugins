@@ -1,7 +1,7 @@
 import type { BaseAssetsData, BaseDOMData, BasePluginData } from '@wp-plugins/services';
 import type { OptionsType } from '@wp-plugins/adapters';
 
-export interface WPTelegramWidgetData extends BaseDOMData<AssetsData>, BasePluginData<FormData, UiData> {}
+export interface WPTelegramWidgetData extends BaseDOMData<AssetsData>, BasePluginData<DataShape, UiData> {}
 
 export interface AssetsData extends BaseAssetsData {
 	tgIconUrl: string;
@@ -37,7 +37,7 @@ export interface AdvancedFields {
 	google_script_url?: string;
 }
 
-export interface FormData {
+export interface DataShape {
 	ajax_widget: AjaxWidgetFields;
 	join_link: JoinLinkFields;
 	legacy_widget: LegacyWidgetFields;

@@ -4,7 +4,7 @@ import $ from 'jquery';
 import { __ } from '@wp-plugins/i18n';
 import { FormField, useFormContext } from '@wp-plugins/form';
 
-import { getFieldLabel, FormData } from '../services';
+import { getFieldLabel, DataShape } from '../services';
 
 const style: CSSProperties = {
 	WebkitAppearance: 'none',
@@ -21,7 +21,7 @@ const style: CSSProperties = {
 };
 
 export const Code: React.FC = () => {
-	const { watch, setValue } = useFormContext<FormData>();
+	const { watch, setValue } = useFormContext<DataShape>();
 
 	const code = watch('code', '');
 

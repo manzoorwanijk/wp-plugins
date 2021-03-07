@@ -1,3 +1,3 @@
-import { FormData } from '../../services';
+import { DataShape } from '../../services';
 
-export const PREFIX: keyof FormData = 'legacy_widget';
+export const PREFIX: keyof DataShape = 'legacy_widget';

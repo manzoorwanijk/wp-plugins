@@ -11,7 +11,7 @@ export const TestMessageResult: React.FC<MessageResultProps> = ({ messageResult,
 	const testResults = Object.entries(messageResult);
 
 	return testResults.length ? (
-		<Box className='test-result' p='1em'>
+		<Box mt='1em'>
 			<Text color='gray.500'>{__('Test result:')}</Text>
 			{testResults.map(([chat_id, result]) => {
 				return (

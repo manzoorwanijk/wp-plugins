@@ -8,9 +8,9 @@ import { SubmitHandler, UseFormMethods } from '@wp-plugins/form';
 import { fetchAPI } from './apiFetch';
 import { useDisplayFeedback } from './useDisplayFeedback';
 
-type FormData = Record<string, any>;
+type DataShape = Record<string, any>;
 
-interface SubmitFormProps<FD extends FormData> {
+interface SubmitFormProps<FD extends DataShape> {
 	displayFeedback?: boolean;
 	form?: UseFormMethods<FD>;
 	formatErrors?: (errors: any) => any;
@@ -21,7 +21,7 @@ interface SubmitFormProps<FD extends FormData> {
 
 const defaultFormatCb = (v: any) => v;
 
-export const useSubmitForm = <FD extends FormData>({
+export const useSubmitForm = <FD extends DataShape>({
 	displayFeedback = true,
 	form,
 	formatErrors = defaultFormatCb,
