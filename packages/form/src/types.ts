@@ -17,6 +17,7 @@ export type CommonFieldProps<FT extends FieldType, V extends FieldValue> = {
 	// groupClassName?: string;
 	id?: string;
 	info?: string;
+	isDisabled?: boolean;
 	isRequired?: boolean;
 	valueAsNumber?: boolean;
 	label?: React.ReactNode;

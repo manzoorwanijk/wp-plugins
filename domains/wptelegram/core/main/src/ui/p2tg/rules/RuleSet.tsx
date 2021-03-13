@@ -59,7 +59,7 @@ export const RuleSet: React.FC<RuleSetProps> = (props) => {
 				<RuleSetValues ruleSetName={ruleSetName} {...props} />
 			</Flex>
 			<Flex className='action-buttons' alignItems='center'>
-				<Box className='add-rule' pl='0.5em'>
+				<Box className='add-rule' ps='0.5em'>
 					<IconButton
 						aria-label={__('Add')}
 						icon={<AddIcon />}
@@ -68,7 +68,7 @@ export const RuleSet: React.FC<RuleSetProps> = (props) => {
 						variant='outline'
 					/>
 				</Box>
-				<Box className='remove-rule' pl='0.5em'>
+				<Box className='remove-rule' ps='0.5em'>
 					<IconButton
 						aria-label={__('Remove')}
 						icon={<CloseIcon />}

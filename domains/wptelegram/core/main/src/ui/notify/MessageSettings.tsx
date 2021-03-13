@@ -1,10 +1,11 @@
 import { Divider, Text } from '@wp-plugins/adapters';
 import { __ } from '@wp-plugins/i18n';
 import { FormField } from '@wp-plugins/form';
-import { SectionCard, Code, ParseModeField } from '@wp-plugins/components';
+import { SectionCard, Code } from '@wp-plugins/components';
 
 import { getFieldLabel } from '../../services';
 import { PREFIX } from './constants';
+import { ParseModeField } from '../ParseModeField';
 
 export const MessageSettings: React.FC = () => {
 	return (

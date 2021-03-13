@@ -1,6 +1,6 @@
 import { Divider } from '@wp-plugins/adapters';
 import { __ } from '@wp-plugins/i18n';
-import { FormField } from '@wp-plugins/form';
+import { FormField, useWatch } from '@wp-plugins/form';
 
 import { getFieldLabel } from '../../../services';
 import { PREFIX } from '../constants';
@@ -21,13 +21,17 @@ const options = [
 ];
 
 const ExcerptSettings: React.FC = () => {
+	const template = useWatch<string>({ name: `${PREFIX}.message_template` }) || '';
+	const hasExcerpt = template.includes('{post_excerpt}');
+
 	return (
 		<>
 			<FormField
 				name={`${PREFIX}.excerpt_source`}
-				fieldType='radio'
+				fieldType='select'
 				label={getFieldLabel('excerpt_source')}
 				options={options}
+				isDisabled={!hasExcerpt}
 			/>
 			<Divider />
 			<FormField
@@ -35,6 +39,8 @@ const ExcerptSettings: React.FC = () => {
 				fieldType='number'
 				label={getFieldLabel('excerpt_length')}
 				description={__('Number of words for the excerpt.')}
+				valueAsNumber
+				isDisabled={!hasExcerpt}
 				min={1}
 				max={300}
 				display='inline-flex'
@@ -45,6 +51,7 @@ const ExcerptSettings: React.FC = () => {
 				fieldType='switch'
 				label={getFieldLabel('excerpt_preserve_eol')}
 				description={__('Preserve newlines in Post Excerpt.')}
+				isDisabled={!hasExcerpt}
 			/>
 		</>
 	);

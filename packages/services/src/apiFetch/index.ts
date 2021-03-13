@@ -4,7 +4,7 @@ import { __, sprintf } from '@wp-plugins/i18n';
 
 export const fetchAPI = {
 	GET: async <T>(options: APIFetchOptions) => {
-		return await apiFetch<T>(options);
+		return await apiFetch<T>({ method: 'GET', ...options });
 	},
 	POST: async <T>(options: APIFetchOptions) => {
 		return await apiFetch<T>({ method: 'POST', ...options });

@@ -1,13 +1,14 @@
 import { Divider } from '@wp-plugins/adapters';
 import { __ } from '@wp-plugins/i18n';
 import { FormField } from '@wp-plugins/form';
-import { SectionCard, ParseModeField } from '@wp-plugins/components';
+import { SectionCard } from '@wp-plugins/components';
 
 import { getFieldLabel } from '../../../services';
 import { PREFIX } from '../constants';
 import { TemplateInfo } from './TemplateInfo';
 import ExcerptSettings from './ExcerptSettings';
 import ImageSettings from './ImageSettings';
+import { ParseModeField } from '../../ParseModeField';
 
 export const MessageSettings: React.FC = () => {
 	return (
@@ -33,6 +34,13 @@ export const MessageSettings: React.FC = () => {
 			/>
 			<Divider />
 			<ParseModeField name={`${PREFIX}.parse_mode`} label={getFieldLabel('parse_mode')} />
+			<Divider />
+			<FormField
+				name={`${PREFIX}.disable_web_page_preview`}
+				fieldType='switch'
+				label={getFieldLabel('disable_web_page_preview')}
+				description={__('Disables previews for links in the messages.')}
+			/>
 		</SectionCard>
 	);
 };

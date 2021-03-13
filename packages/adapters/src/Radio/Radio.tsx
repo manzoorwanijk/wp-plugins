@@ -12,12 +12,13 @@ import { OptionsType } from '../types';
 export interface RadioProps extends Partial<ChakraRadioProps> {
 	options?: OptionsType;
 	isInline?: boolean;
+	isDisabled?: boolean;
 }
 
 const dir: StackProps['direction'] = ['column', 'row'];
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-	({ children, options, isInline, name, ...restProps }, ref) => {
+	({ children, options, isDisabled, isInline, name, ...restProps }, ref) => {
 		const childNodes = useMemo(() => {
 			return options?.map(({ label, value, ...rest }, index) => {
 				const key = `${name}-${value}-${index}`;
@@ -32,7 +33,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
 		const direction = isInline ? dir : 'column';
 
 		return (
-			<RadioGroup {...restProps} name={name} ref={ref}>
+			<RadioGroup {...restProps} disabled={isDisabled} name={name} ref={ref}>
 				<Stack direction={direction} spacing='1em'>
 					{childNodes || children}
 				</Stack>

@@ -14,27 +14,20 @@ export type FetchRuleValues = (args: FetchRuleValuesArgs) => Promise<OptionsType
 export const useFetchRuleValues = () => {
 	const { rest_namespace } = useData('api');
 
-	const path = `${rest_namespace}/rules`;
+	const path = `${rest_namespace}/p2tg-rules`;
 
 	return useCallback(
 		async (args) => {
-			const { setInProgress, setResult, ...data } = args;
+			const { setInProgress, setResult, ...params } = args;
 
 			setInProgress(true);
-			return await new Promise((resolve) => {
-				setTimeout(() => {
-					const result =
-						args.param === 'post'
-							? [{ label: 'Group', options: [{ value: 'test', label: 'Test' }] }]
-							: [{ value: 'testc', label: 'Test Cat' }];
-					resolve(result);
-					setResult(result);
-					setInProgress(false);
-				}, 3000);
-			});
 
 			try {
-				const result = await fetchAPI.GET<OptionsType>({ data, path });
+				// convert params to URL query string
+				const urlParams = new URLSearchParams(params);
+				const pathWithParams = `${path}?${urlParams.toString()}`;
+
+				const result = await fetchAPI.GET<OptionsType>({ path: pathWithParams });
 
 				setResult(result);
 

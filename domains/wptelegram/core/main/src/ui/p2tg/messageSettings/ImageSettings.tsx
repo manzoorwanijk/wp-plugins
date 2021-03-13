@@ -1,44 +1,49 @@
+import { useMemo } from 'react';
+
 import { Divider } from '@wp-plugins/adapters';
 import { __ } from '@wp-plugins/i18n';
-import { FormField } from '@wp-plugins/form';
+import { FormField, useWatch } from '@wp-plugins/form';
 
 import { getFieldLabel } from '../../../services';
 import { PREFIX } from '../constants';
-
-const image_position_options = [
-	{
-		value: 'before',
-		label: __('Before the Text'),
-	},
-	{
-		value: 'after',
-		label: __('After the Text'),
-	},
-];
+import { SingleMessage } from './SingleMessage';
 
 const ImageSettings: React.FC = () => {
+	const isDisabled = !useWatch({ name: `${PREFIX}.send_featured_image` });
+
+	const image_position_options = useMemo(
+		() => [
+			{
+				value: 'before',
+				label: __('Before the Text'),
+				isDisabled,
+			},
+			{
+				value: 'after',
+				label: __('After the Text'),
+				isDisabled,
+			},
+		],
+		[isDisabled]
+	);
 	return (
 		<>
 			<FormField
-				name={`${PREFIX}.send_featured_image`}
+				description={__('Send Featured Image (if exists).')}
 				fieldType='switch'
 				label={getFieldLabel('send_featured_image')}
-				description={__('Send Featured Image (if exists)')}
+				name={`${PREFIX}.send_featured_image`}
 			/>
 			<Divider />
 			<FormField
-				name={`${PREFIX}.image_position`}
 				fieldType='radio'
+				isDisabled={isDisabled}
 				label={getFieldLabel('image_position')}
+				name={`${PREFIX}.image_position`}
 				options={image_position_options}
 			/>
 			<Divider />
-			<FormField
-				name={`${PREFIX}.single_message`}
-				fieldType='switch'
-				label={getFieldLabel('single_message')}
-				description={__('Send both text and image in single message')}
-			/>
+			<SingleMessage isDisabled={isDisabled} />
 		</>
 	);
 };

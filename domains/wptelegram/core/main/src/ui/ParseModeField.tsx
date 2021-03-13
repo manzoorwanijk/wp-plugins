@@ -13,7 +13,7 @@ export const PARSE_MODE_OPTIONS = [
 		label: __('None'),
 	},
 	{
-		value: 'MarkdownV2',
+		value: 'Markdown',
 		label: __('Markdown style'),
 	},
 	{

@@ -1,6 +1,7 @@
 import { Box } from '@wp-plugins/adapters';
 import { PluginInfoCard, WPTGSocialIcons } from '@wp-plugins/components';
 import { __ } from '@wp-plugins/i18n';
+import { isDev } from '@wp-plugins/utilities';
 import { FormDebug } from '@wp-plugins/form';
 
 import { useData } from '../services';
@@ -23,7 +24,7 @@ const Sidebar: React.FC = () => {
 				socialIcons={<WPTGSocialIcons tgIconUrl={tgIconUrl} />}
 				title={title}
 			/>
-			<FormDebug />
+			{isDev && <FormDebug />}
 		</Box>
 	);
 };

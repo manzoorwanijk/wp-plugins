@@ -27,7 +27,7 @@ export const Instructions: React.FC = () => {
 					)}
 				</ListItem>
 				<ListItem>{__('Enter the Channel Username in the field below.')}</ListItem>
-				<List styleType='disc' ml='1em'>
+				<List styleType='disc' ms='1em'>
 					<ListItem>
 						{createInterpolateElement(sprintf(__('Username must start with %s'), '<Symbol />'), {
 							Symbol: <Code>@</Code>,

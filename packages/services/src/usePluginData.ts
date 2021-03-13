@@ -1,4 +1,4 @@
-import { Plugins, BaseDOMData } from './types';
+import type { Plugins, BaseDOMData } from './types';
 
 export const usePluginData = <PluginData extends BaseDOMData, K extends keyof PluginData | undefined>(
 	plugin: keyof Plugins,

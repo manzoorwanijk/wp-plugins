@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Form, yupResolver, useForm } from '@wp-plugins/form';
 import { Cols75x25 } from '@wp-plugins/components';
 
@@ -6,7 +7,7 @@ import { FORM_ID } from '../constants';
 import Sidebar from './Sidebar';
 import { Header } from './Header';
 import { SubmitInfo } from './SubmitInfo';
-import { useInit, useOnSubmit, useOnInvalid } from '../services';
+import { useInit, useOnSubmit, useOnInvalid, prepDefaultValues } from '../services';
 import { TabbedSections } from './TabbedSections';
 
 import './styles.scss';
@@ -16,7 +17,9 @@ const resolver = yupResolver<DataShape>(validationSchema);
 const App: React.FC = () => {
 	useInit();
 
-	const { savedSettings: defaultValues } = useData();
+	const { savedSettings } = useData();
+
+	const defaultValues = useMemo(() => prepDefaultValues(savedSettings), [savedSettings]);
 
 	const form = useForm<DataShape>({ defaultValues, resolver, mode: 'onBlur' });
 

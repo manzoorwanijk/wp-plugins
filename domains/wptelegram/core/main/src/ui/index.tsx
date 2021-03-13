@@ -17,6 +17,6 @@ const ThemedApp: React.FC = () => (
 // clea up notifications etc.
 cleanup(FORM_ID);
 
-setI18nData('wptelegram_widget', 'wptelegram-widget');
+setI18nData('wptelegram', 'wptelegram');
 
 ReactDOM.render(<ThemedApp />, root);

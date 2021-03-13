@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { __ } from '@wp-plugins/i18n';
 import { FormField, useFormContext } from '@wp-plugins/form';
 import { OptionsType } from '@wp-plugins/adapters';
-import { useLocalStorage } from '@wp-plugins/services';
+import { useLocalStorage, moduleStorage } from '@wp-plugins/services';
 import { usePrevious } from '@wp-plugins/utilities';
 
 import { useFetchRuleValues } from '../../../services';
@@ -21,7 +21,7 @@ export const RuleSetValues: React.FC<RuleSetProps & { ruleSetName: string }> = (
 	const [defaultRuleValues, setDefaulRuleValues] = useState<OptionsType>([]);
 
 	const fetchRuleValues = useFetchRuleValues();
-	const { getItem, setItem } = useLocalStorage<RuleValuesCache>(STORAGE_KEY, {}, sessionStorage);
+	const { getItem, setItem } = useLocalStorage<RuleValuesCache>(STORAGE_KEY, {}, moduleStorage);
 
 	const { watch, setValue } = useFormContext();
 	const param = watch(`${ruleSetName}.param`);

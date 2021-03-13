@@ -8,6 +8,10 @@
         "location": "domains/wptelegram/core/main"
     },
     {
+        "name": "@wp-plugins/wptelegram--p2tg-gb",
+        "location": "domains/wptelegram/core/p2tg-gb"
+    },
+    {
         "name": "@wp-plugins/wptelegram-login--blocks",
         "location": "domains/wptelegram/login/blocks"
     },

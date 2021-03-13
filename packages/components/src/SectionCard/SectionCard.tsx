@@ -9,7 +9,7 @@ export interface SectionCardProps extends Omit<BoxProps, 'title'> {
 
 export const SectionCard: React.FC<SectionCardProps> = ({ body, children, title, headerProps, bodyProps, ...rest }) => {
 	return (
-		<Box border='1px' roundedTop='md' borderColor='gray.200' overflow='hidden' mb='2em' {...rest}>
+		<Box border='1px' roundedTop='md' borderColor='gray.200' mb='2em' {...rest}>
 			<Box px='1rem' py='.5rem' bgColor='#eaeaea' {...headerProps}>
 				{title}
 			</Box>

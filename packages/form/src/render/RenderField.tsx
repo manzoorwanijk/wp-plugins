@@ -39,7 +39,12 @@ export const RenderField = <FT extends FieldType, V extends FieldValue>(
 	}
 
 	return (
-		<FormControl isInvalid={Boolean(error)} isRequired={isRequired} className={className}>
+		<FormControl
+			className={className}
+			isDisabled={rest.isDisabled}
+			isInvalid={Boolean(error)}
+			isRequired={isRequired}
+		>
 			{label ? (
 				<FormLabel htmlFor={fieldId} className='form-control__label' alignSelf='flex-start' pb='1em'>
 					{label}
@@ -55,7 +60,6 @@ export const RenderField = <FT extends FieldType, V extends FieldValue>(
 				<Adapter
 					aria-label={label as string}
 					aria-describedby={tooltipKey}
-					error={error}
 					fieldRef={fieldRef}
 					fieldType={fieldType}
 					id={fieldId}

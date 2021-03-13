@@ -14,7 +14,7 @@ interface SubmitFormProps<FD extends DataShape> {
 	displayFeedback?: boolean;
 	form?: UseFormMethods<FD>;
 	formatErrors?: (errors: any) => any;
-	formatValues?: (values: any) => any;
+	normalizeData?: (values: any) => any;
 	getErrorMessage: GetErrorMessage<Exclude<keyof FD, number | symbol>>;
 	path: string; // WP REST API path
 }
@@ -25,7 +25,7 @@ export const useSubmitForm = <FD extends DataShape>({
 	displayFeedback = true,
 	form,
 	formatErrors = defaultFormatCb,
-	formatValues = defaultFormatCb,
+	normalizeData = defaultFormatCb,
 	getErrorMessage,
 	path,
 }: SubmitFormProps<FD>): SubmitHandler<FD> => {
@@ -35,7 +35,7 @@ export const useSubmitForm = <FD extends DataShape>({
 		async (values) => {
 			let result: any;
 			try {
-				const data = formatValues(values);
+				const data = normalizeData(values);
 				result = await fetchAPI.POST({ data, path });
 
 				if (displayFeedback) {
@@ -87,7 +87,7 @@ export const useSubmitForm = <FD extends DataShape>({
 			}
 			return result;
 		},
-		[displayFeedback, displaySubmitErrors, displaySuccess, form, formatErrors, formatValues, getErrorMessage, path]
+		[displayFeedback, displaySubmitErrors, displaySuccess, form, formatErrors, getErrorMessage, normalizeData, path]
 	);
 
 	return submitForm;

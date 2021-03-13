@@ -12,6 +12,8 @@ const dummyDOMData: WPTelegramCoreData = {
 		logoUrl: 'https://ps.w.org/wptelegram/assets/icon-128x128.png',
 		tgIconUrl: 'https://ps.w.org/wptelegram/assets/icon-128x128.png',
 		editProfileUrl: window.location.href,
+		botApiLogUrl: window.location.href,
+		p2tgLogUrl: window.location.href,
 	},
 	pluginInfo: {
 		name: 'wptelegram',
@@ -20,18 +22,19 @@ const dummyDOMData: WPTelegramCoreData = {
 		description: 'With this plugin, you can send posts to Telegram and receive notifications and do lot more :)',
 	},
 	savedSettings: {
-		bot_token: '1234',
+		bot_token: '123456789:AbCdEfGhijKlMnOpQrstUvwxYz123456789',
 		bot_username: 'testbot',
 		p2tg: {
 			active: true,
-			channels: [{ value: '@hello' }, { value: '@world' }],
+			channels: ['@hello', '@world'] as any,
 			send_when: ['new'],
 			post_types: ['post'],
-			rules: [{ value: [{ param: 'post', values: [], operator: 'in' }] }],
+			rules: [],
 			excerpt_source: 'post_content',
+			excerpt_length: 55,
 			image_position: 'before',
 			parse_mode: 'none',
-			misc: [],
+			delay: 0,
 		},
 		notify: {
 			active: true,

@@ -1,0 +1,14 @@
+{
+	"author": "WP Plugins",
+	"name": "@wp-plugins/wptelegram--p2tg-gb",
+	"version": "1.0.0",
+	"private": true,
+	"license": "GPL-3.0",
+	"main": "src/index.tsx",
+	"main:src": "src/index.tsx",
+	"isCore": true,
+	"scripts": {
+		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
+		"update-deps": "npx ncu -p yarn -u"
+	}
+}

@@ -1,12 +1,14 @@
 import { useFieldArray } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
 import { Text, FormControl, FormHelperText, FormLabel, IconButton, Flex, Button } from '@wp-plugins/adapters';
-import { sprintf, __ } from '@wp-plugins/i18n';
+import { __ } from '@wp-plugins/i18n';
 import { AddIcon, CloseIcon } from '@wp-plugins/icons';
 import { SectionCard } from '@wp-plugins/components';
 
 import { RenderRepeatableProps, FieldValue, FieldType, RepeatableValue } from '../types';
 import { FormField } from '../FormField';
+import { RenderErrorMessage } from './RenderErrorMessage';
 
 const DEFAULT_ITEM = { value: undefined };
 
@@ -29,29 +31,20 @@ export const RenderRepeatable = <FT extends FieldType, V extends FieldValue>(
 
 	const fieldArray = useFieldArray<RepeatableValue<V>>({ name });
 
-	let errorMessage: React.ReactNode;
-	if (error) {
-		console.log({ error });
-
-		errorMessage = <Text color='tomato'>{error}</Text>;
-	}
-
 	return (
 		<>
-			<FormControl>
+			<FormControl isInvalid={Boolean(error)}>
 				<FormLabel>{label}</FormLabel>
 				{description ? <FormHelperText>{description}</FormHelperText> : null}
+				<ErrorMessage name={name} render={RenderErrorMessage} />
 			</FormControl>
-			{errorMessage}
 			{!fieldArray.fields.length ? (
 				<Text fontWeight='bold' as='span'>
-					{initialLabel}{' '}
+					{initialLabel}&nbsp;
 				</Text>
 			) : null}
 			{fieldArray.fields.map((field, index) => {
-				const title = repeatableItemLabel
-					? repeatableItemLabel(index)
-					: sprintf(__('Entry %d'), `${index + 1}`);
+				const title = repeatableItemLabel ? repeatableItemLabel(index) : `#${index + 1}`;
 
 				const removeButton = (
 					<IconButton

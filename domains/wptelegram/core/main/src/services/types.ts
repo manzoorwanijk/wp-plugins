@@ -22,6 +22,7 @@ export interface UiData {
 	debug_info?: string;
 	post_types?: OptionsType;
 	rule_types?: OptionsType;
+	is_wp_cron_disabled?: boolean;
 	macros?: {
 		post: TemplateMacro;
 		terms: TemplateMacro;
@@ -54,14 +55,16 @@ export interface PostToTelegramFields extends CommonFields {
 	cats_as_tags?: boolean;
 	channels?: Array<Partial<ArrayField<RepeatableValue<string>>>>;
 	delay?: number;
+	disable_notification?: boolean;
+	disable_web_page_preview?: boolean;
 	excerpt_length?: number;
 	excerpt_preserve_eol?: boolean;
 	excerpt_source?: 'post_content' | 'before_more' | 'post_excerpt';
 	image_position?: 'before' | 'after';
 	inline_button_text?: string;
+	inline_button_url?: string;
 	inline_url_button?: boolean;
 	message_template?: string;
-	misc?: Array<'disable_web_page_preview' | 'disable_notification'>;
 	parse_mode?: ParseMode;
 	plugin_posts?: boolean;
 	post_edit_switch?: boolean;
@@ -84,7 +87,7 @@ export interface ProxyFields extends CommonFields {
 	proxy_method?: 'google_script' | 'php_proxy';
 	script_url?: string;
 	proxy_host?: string;
-	proxy_port?: number;
+	proxy_port?: string;
 	proxy_type?:
 		| 'CURLPROXY_HTTP'
 		| 'CURLPROXY_SOCKS4'

@@ -1,23 +1,14 @@
-import { __ } from '@wp-plugins/i18n';
+import { sprintf, __ } from '@wp-plugins/i18n';
 import { FormField } from '@wp-plugins/form';
 import { SectionCard } from '@wp-plugins/components';
-import { Divider } from '@wp-plugins/adapters';
+import { Divider, Text } from '@wp-plugins/adapters';
 
-import { getFieldLabel } from '../../services';
+import { getFieldLabel, useData } from '../../services';
 import { PREFIX } from './constants';
 
-const misc_options = [
-	{
-		value: 'disable_web_page_preview',
-		label: __('Disable Web Page Preview'),
-	},
-	{
-		value: 'disable_notification',
-		label: __('Disable Notifications'),
-	},
-];
-
 export const Miscellaneous: React.FC = () => {
+	const { is_wp_cron_disabled } = useData('uiData');
+
 	return (
 		<SectionCard title={__('Miscellaneous')} className='miscellaneous-settings'>
 			<FormField
@@ -40,16 +31,31 @@ export const Miscellaneous: React.FC = () => {
 				fieldType='number'
 				label={getFieldLabel('delay')}
 				info={__('The delay starts after the post gets published.')}
-				after={<>{' ' + __('Minute(s)')}</>}
+				after={
+					<>
+						&nbsp;{__('Minute(s)')}
+						{is_wp_cron_disabled && (
+							<>
+								<br />
+								<Text color='red.500'>{__('WordPress cron should not be disabled!')}</Text>
+							</>
+						)}
+					</>
+				}
 				display='inline-flex'
+				valueAsNumber
 				maxWidth='100px'
 			/>
 			<Divider />
 			<FormField
-				name={`${PREFIX}.misc`}
-				fieldType='multicheck'
-				label={getFieldLabel('misc')}
-				options={misc_options}
+				description={sprintf(
+					'%s %s',
+					__('Send the messages silently.'),
+					__('Users will receive a notification with no sound.')
+				)}
+				fieldType='switch'
+				label={getFieldLabel('disable_notification')}
+				name={`${PREFIX}.disable_notification`}
 			/>
 		</SectionCard>
 	);

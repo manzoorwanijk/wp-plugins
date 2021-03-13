@@ -14,10 +14,10 @@ export const Advanced: React.FC = () => {
 	const log_options = useMemo(
 		() => [
 			{
-				value: 'bot_api_out',
+				value: 'bot_api',
 				label: (
 					<>
-						{__('Bot API')}&ensp;[<Link href={assets.botApiLogUrl}>{__('View')}</Link>]
+						{__('Bot API')}&ensp;[<Link href={assets.botApiLogUrl}>{__('View log')}</Link>]
 					</>
 				),
 			},
@@ -25,7 +25,7 @@ export const Advanced: React.FC = () => {
 				value: 'p2tg',
 				label: (
 					<>
-						{__('Post to Telegram')}&ensp;[<Link href={assets.p2tgLogUrl}>{__('View')}</Link>]
+						{__('Post to Telegram')}&ensp;[<Link href={assets.p2tgLogUrl}>{__('View log')}</Link>]
 					</>
 				),
 			},

@@ -6,7 +6,6 @@ export * from './Description';
 export * from './DebugData';
 export * from './Instructions';
 export * from './InstructionsLink';
-export * from './ParseModeField';
 export * from './PluginInfo';
 export * from './ProxyDisclaimer';
 export * from './SectionCard';
