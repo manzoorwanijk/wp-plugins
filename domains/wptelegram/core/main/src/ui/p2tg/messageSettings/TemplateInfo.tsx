@@ -6,6 +6,7 @@ import { Collapse, Code } from '@wp-plugins/components';
 import { createInterpolateElement } from '@wp-plugins/utilities';
 
 import { useData } from '../../../services';
+import { Upsell } from '../../Upsell';
 
 export const TemplateInfo: React.FC = () => {
 	const macro_groups = useData('uiData').macros;
@@ -53,6 +54,7 @@ export const TemplateInfo: React.FC = () => {
 					</tbody>
 				</table>
 			</Box>
+			<Upsell location='template' />
 		</Collapse>
 	);
 };

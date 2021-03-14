@@ -6,6 +6,7 @@ import { createInterpolateElement } from '@wp-plugins/utilities';
 
 import { getFieldLabel } from '../../../services';
 import { PREFIX } from '../constants';
+import { Upsell } from '../../Upsell';
 
 export const MessageKeyboard: React.FC = () => {
 	const isDisabled = !useWatch({ name: `${PREFIX}.inline_url_button` });
@@ -41,6 +42,7 @@ export const MessageKeyboard: React.FC = () => {
 				name={`${PREFIX}.inline_button_url`}
 				placeholder='{full_url}'
 			/>
+			<Upsell location='inline-button' />
 		</SectionCard>
 	);
 };

@@ -43,6 +43,7 @@ export type {
 	ButtonProps,
 	CodeProps,
 	StackProps,
+	LinkProps,
 	NumberInputProps,
 	SelectProps,
 	SwitchProps,

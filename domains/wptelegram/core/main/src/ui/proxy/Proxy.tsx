@@ -6,6 +6,7 @@ import { getFieldLabel } from '../../services';
 import { PREFIX } from './constants';
 import { IfActive } from '../IfActive';
 import { ProxySettings } from './ProxySettings';
+import { Upsell } from '../Upsell';
 
 const proxy_options = [
 	{
@@ -37,6 +38,7 @@ export const Proxy: React.FC = () => {
 						isInline
 						options={proxy_options}
 					/>
+					<Upsell location='proxy-method' />
 				</SectionCard>
 
 				<ProxySettings />

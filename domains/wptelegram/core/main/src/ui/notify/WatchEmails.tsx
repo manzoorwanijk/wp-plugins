@@ -6,6 +6,7 @@ import { createInterpolateElement } from '@wp-plugins/utilities';
 
 import { getFieldLabel, DataShape } from '../../services';
 import { PREFIX } from './constants';
+import { Upsell } from '../Upsell';
 
 const direction: StackProps['direction'] = ['column', 'row'];
 
@@ -26,6 +27,7 @@ export const WatchEmails: React.FC = () => {
 				name={`${PREFIX}.watch_emails`}
 				maxWidth='350px'
 			/>
+			<Upsell location='watch-emails' textAlign='center' />
 			<Stack spacing={8} direction={direction}>
 				<StackItem>
 					<FormField

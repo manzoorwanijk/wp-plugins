@@ -9,6 +9,7 @@ import { Header } from './Header';
 import { SubmitInfo } from './SubmitInfo';
 import { useInit, useOnSubmit, useOnInvalid, prepDefaultValues } from '../services';
 import { TabbedSections } from './TabbedSections';
+import { Upsell } from './Upsell';
 
 import './styles.scss';
 
@@ -30,6 +31,7 @@ const App: React.FC = () => {
 	const leftCol = (
 		<>
 			<Header />
+			<Upsell location='header' />
 			<TabbedSections />
 			<SubmitInfo />
 		</>

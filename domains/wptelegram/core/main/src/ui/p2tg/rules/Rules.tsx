@@ -7,6 +7,7 @@ import { getFieldLabel, useData } from '../../../services';
 import { PREFIX } from '../constants';
 import { And } from './And';
 import { CustomRules } from './CustomRules';
+import { Upsell } from '../../Upsell';
 
 const send_when_options = [
 	{
@@ -41,6 +42,7 @@ export const Rules: React.FC = () => {
 			<Divider my='0' />
 			<And />
 			<CustomRules />
+			<Upsell location='rules' textAlign='center' />
 		</SectionCard>
 	);
 };

@@ -5,6 +5,7 @@ import { Stack, StackProps, StackItem } from '@wp-plugins/adapters';
 
 import { getFieldLabel, DataShape } from '../../services';
 import { PREFIX } from './constants';
+import { Upsell } from '../Upsell';
 
 const direction: StackProps['direction'] = ['column', 'row'];
 
@@ -34,6 +35,7 @@ export const Destination: React.FC = () => {
 					{result}
 				</StackItem>
 			</Stack>
+			<Upsell location='channels' textAlign='center' />
 		</SectionCard>
 	);
 };

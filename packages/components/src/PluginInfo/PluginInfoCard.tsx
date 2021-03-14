@@ -16,6 +16,7 @@ export interface PluginInfoCardProps {
 	helpText?: string;
 	supportLink?: string;
 	supportLinkText?: string;
+	upsell?: React.ReactNode;
 }
 
 const linkHoverProps = { borderBottom: 'none' };
@@ -29,6 +30,7 @@ export const PluginInfoCard: React.FC<PluginInfoCardProps> = ({
 	supportLink,
 	supportLinkText,
 	title,
+	upsell,
 }) => {
 	return (
 		<SectionCard title={title} border='1px' borderColor='gray.200' bodyProps={bodyProps}>
@@ -56,6 +58,7 @@ export const PluginInfoCard: React.FC<PluginInfoCardProps> = ({
 						</Box>
 					</StackItem>
 				)}
+				{upsell && <StackItem>{upsell}</StackItem>}
 				<StackItem borderBottom={0}>
 					<Box>
 						<Text as='span'>{__('Need help?')}</Text>

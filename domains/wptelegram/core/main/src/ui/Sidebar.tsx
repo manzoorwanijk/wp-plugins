@@ -5,6 +5,7 @@ import { isDev } from '@wp-plugins/utilities';
 import { FormDebug } from '@wp-plugins/form';
 
 import { useData } from '../services';
+import { Upsell } from './Upsell';
 
 const Sidebar: React.FC = () => {
 	const {
@@ -23,6 +24,7 @@ const Sidebar: React.FC = () => {
 				supportLinkText='@WPTelegramChat'
 				socialIcons={<WPTGSocialIcons tgIconUrl={tgIconUrl} />}
 				title={title}
+				upsell={<Upsell breakLine location='sidebar' fontWeight='normal' />}
 			/>
 			{isDev && <FormDebug />}
 		</Box>

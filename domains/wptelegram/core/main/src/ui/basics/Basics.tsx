@@ -6,6 +6,7 @@ import { BotTokenField } from '@wp-plugins/components';
 
 import { getFieldLabel } from '../../services';
 import { Instructions } from './Instructions';
+import { Upsell } from '../Upsell';
 
 export const Basics: React.FC = () => {
 	const [botUsernameReadOnly, setBotUsernameReadOnly] = useState(true);
@@ -30,6 +31,7 @@ export const Basics: React.FC = () => {
 				name='bot_username'
 				onDoubleClick={botUsernameDoubleClick}
 			/>
+			<Upsell location='bot' textAlign='center' />
 		</>
 	);
 };

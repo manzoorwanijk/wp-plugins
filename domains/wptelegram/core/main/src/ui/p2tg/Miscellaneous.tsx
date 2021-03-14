@@ -5,6 +5,7 @@ import { Divider, Text } from '@wp-plugins/adapters';
 
 import { getFieldLabel, useData } from '../../services';
 import { PREFIX } from './constants';
+import { Upsell } from '../Upsell';
 
 export const Miscellaneous: React.FC = () => {
 	const { is_wp_cron_disabled } = useData('uiData');
@@ -46,6 +47,7 @@ export const Miscellaneous: React.FC = () => {
 				valueAsNumber
 				maxWidth='100px'
 			/>
+			<Upsell location='delay' />
 			<Divider />
 			<FormField
 				description={sprintf(
