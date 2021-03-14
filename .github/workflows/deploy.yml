@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        domain: [wptelegram-login, wptelegram-widget, wptelegram-comments]
+        domain: [wptelegram, wptelegram-login, wptelegram-widget, wptelegram-comments]
     name: Deploy ${{ matrix.domain }} Assets
     steps:
       - name: Checkout the commit

@@ -12,7 +12,7 @@ export const TestMessageResult: React.FC<MessageResultProps> = ({ messageResult,
 
 	return testResults.length ? (
 		<Box mt='1em'>
-			<Text color='gray.500'>{__('Test result:')}</Text>
+			<Text color='gray.500'>{__('Test Result:')}</Text>
 			{testResults.map(([chat_id, result]) => {
 				return (
 					<Flex key={chat_id} py='1em'>

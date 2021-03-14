@@ -17,7 +17,7 @@ export const MessageSettings: React.FC = () => {
 				description={__('Structure of the message to be sent.')}
 				after={
 					<>
-						<Text as='span'>{__('You can use any text, emojis or these macros in any order:')}</Text>
+						<Text as='span'>{__('You can use any text, emojis or these macros in any order.')}</Text>
 						<br />
 						{['{email_subject}', '{email_message}'].map((tag, i) => (
 							<Code key={i}>{tag}</Code>
